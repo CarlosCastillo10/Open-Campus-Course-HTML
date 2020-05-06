@@ -1,0 +1,94 @@
+<problem display_name="Semana 6" markdown="&gt;&gt;La Inteligencia Artificial :&lt;&lt;&#10;( ) Prete&#9;nde construir un androide que replique la estructura de la cavidad craneal del hombre.&#10;( ) Promueve la construcción máquinas que realicen cálculos matemáticos en fracciones de segundos.&#10;(x) Intenta utilizar las computadoras para simular procesos mentales humanos.&#10;&#10;&#10;&gt;&gt;La prueba de Turing implica que:&lt;&lt;&#10;(x) Una computadora puede demostrar un comportamiento inteligente si engaña repetidamente a los interrogadores haciéndoles pensar que es una persona. &#10;( ) Una computadora puede demostrar que tiene las mismas reacciones que un ser humano, dando instrucciones a los usuarios.&#10;( ) Una computadora puede demostrar que piensa igual a un ser humano al ser capaz de resolver rápidamente operaciones matemáticas.&#10;&#10;&gt;&gt;¿Cuál de las siguientes opciones constituye uno de los primeros trabajos de la Inteligencia Artificial?&lt;&lt;&#10;[x] Juegos de damas&#10;[ ] Construcción de androides&#10;[ ] Máquinas que realicen tareas operativas&#10;[x] Juegos de ajedrez.&#10;&#10;&gt;&gt;Una base de conocimiento:&lt;&lt;&#10;( ) Propone un conjunto de procedimientos para guardar información en un software específico.&#10;( ) Contiene almacenada información existente mediante tablas, registros y campos.&#10;(x) Contiene un sistema de reglas para determinar y cambiar la relación entre esos hechos.&#10;&#10;&gt;&gt;Las redes neuronales se programan:&lt;&lt;&#10;( ) De forma habitual, como un sistema experto.&#10;( ) Mediante reglas que permiten que el sistema aprenda.&#10;(x) Mediante patrones, basándose en pruebas y errores, como hace el cerebro.&#10;&#10;&gt;&gt;Un sistema experto, normalmente representa el conocimiento en forma de reglas de tipo:&lt;&lt;&#10;( ) “sí y sólo sí”&#10;(x) “si , entonces”&#10;( ) “es verdad que”&#10;&#10;&gt;&gt;Una red neuronal aprende a través de:&lt;&lt;&#10;( ) Reconocimiento de patrones.&#10;(x) Patrones basándose en pruebas y errores.&#10;( ) Miles de procesadores llamados neuronas.&#10;&#10;&gt;&gt;Un motor de inferencia:&lt;&lt;&#10;( ) Almacena hechos.&#10;( ) Aprende en base a reglas.&#10;(x) Obtiene nuevas conclusiones o hechos.&#10;&#10;&gt;&gt;Seleccione el literal que es falso:&lt;&lt;&#10;(x) El cerebro humano trata de manera aislada cada hecho lo que permite que no lo recuerde.&#10;( ) Uno de los retos de la ciencia y la tecnología es entender y reproducir el funcionamiento del cerebro humano.&#10;( ) En el cerebro humano, la manipulación del conocimiento incorpora relaciones y hechos. &#10;&#10;&gt;&gt;Seleccione el literal que es verdadero.&lt;&lt;&#10;( ) Las computadoras dominan el lenguaje natural. &#10;( ) Los sistemas expertos modernos están basados solo en bases de conocimiento que representan las ideas de un campo específico de destreza.&#10;(x) El reconocimiento de patrones implica la identificación de patrones repetitivos en los datos de entrada con el objetivo de entenderla o clasificarla." max_attempts="2" showanswer="correct_or_past_due" submission_wait_seconds="60" weight="10.0">
+<p>La Inteligencia Artificial :</p>
+<multiplechoiceresponse>
+  <choicegroup label="La Inteligencia Artificial :" type="MultipleChoice">
+    <choice correct="false">Prete	nde construir un androide que replique la estructura de la cavidad craneal del hombre.</choice>
+    <choice correct="false">Promueve la construcción máquinas que realicen cálculos matemáticos en fracciones de segundos.</choice>
+    <choice correct="true">Intenta utilizar las computadoras para simular procesos mentales humanos.</choice>
+  </choicegroup>
+</multiplechoiceresponse>
+
+<p>La prueba de Turing implica que:</p>
+<multiplechoiceresponse>
+  <choicegroup label="La prueba de Turing implica que:" type="MultipleChoice">
+    <choice correct="true">Una computadora puede demostrar un comportamiento inteligente si engaña repetidamente a los interrogadores haciéndoles pensar que es una persona.</choice>
+    <choice correct="false">Una computadora puede demostrar que tiene las mismas reacciones que un ser humano, dando instrucciones a los usuarios.</choice>
+    <choice correct="false">Una computadora puede demostrar que piensa igual a un ser humano al ser capaz de resolver rápidamente operaciones matemáticas.</choice>
+  </choicegroup>
+</multiplechoiceresponse>
+
+<p>¿Cuál de las siguientes opciones constituye uno de los primeros trabajos de la Inteligencia Artificial?</p>
+<choiceresponse>
+  <checkboxgroup label="¿Cuál de las siguientes opciones constituye uno de los primeros trabajos de la Inteligencia Artificial?">
+    <choice correct="true">Juegos de damas</choice>
+    <choice correct="false">Construcción de androides</choice>
+    <choice correct="false">Máquinas que realicen tareas operativas</choice>
+    <choice correct="true">Juegos de ajedrez.</choice>
+  </checkboxgroup>
+</choiceresponse>
+
+<p>Una base de conocimiento:</p>
+<multiplechoiceresponse>
+  <choicegroup label="Una base de conocimiento:" type="MultipleChoice">
+    <choice correct="false">Propone un conjunto de procedimientos para guardar información en un software específico.</choice>
+    <choice correct="false">Contiene almacenada información existente mediante tablas, registros y campos.</choice>
+    <choice correct="true">Contiene un sistema de reglas para determinar y cambiar la relación entre esos hechos.</choice>
+  </choicegroup>
+</multiplechoiceresponse>
+
+<p>Las redes neuronales se programan:</p>
+<multiplechoiceresponse>
+  <choicegroup label="Las redes neuronales se programan:" type="MultipleChoice">
+    <choice correct="false">De forma habitual, como un sistema experto.</choice>
+    <choice correct="false">Mediante reglas que permiten que el sistema aprenda.</choice>
+    <choice correct="true">Mediante patrones, basándose en pruebas y errores, como hace el cerebro.</choice>
+  </choicegroup>
+</multiplechoiceresponse>
+
+<p>Un sistema experto, normalmente representa el conocimiento en forma de reglas de tipo:</p>
+<multiplechoiceresponse>
+  <choicegroup label="Un sistema experto, normalmente representa el conocimiento en forma de reglas de tipo:" type="MultipleChoice">
+    <choice correct="false">“sí y sólo sí”</choice>
+    <choice correct="true">“si , entonces”</choice>
+    <choice correct="false">“es verdad que”</choice>
+  </choicegroup>
+</multiplechoiceresponse>
+
+<p>Una red neuronal aprende a través de:</p>
+<multiplechoiceresponse>
+  <choicegroup label="Una red neuronal aprende a través de:" type="MultipleChoice">
+    <choice correct="false">Reconocimiento de patrones.</choice>
+    <choice correct="true">Patrones basándose en pruebas y errores.</choice>
+    <choice correct="false">Miles de procesadores llamados neuronas.</choice>
+  </choicegroup>
+</multiplechoiceresponse>
+
+<p>Un motor de inferencia:</p>
+<multiplechoiceresponse>
+  <choicegroup label="Un motor de inferencia:" type="MultipleChoice">
+    <choice correct="false">Almacena hechos.</choice>
+    <choice correct="false">Aprende en base a reglas.</choice>
+    <choice correct="true">Obtiene nuevas conclusiones o hechos.</choice>
+  </choicegroup>
+</multiplechoiceresponse>
+
+<p>Seleccione el literal que es falso:</p>
+<multiplechoiceresponse>
+  <choicegroup label="Seleccione el literal que es falso:" type="MultipleChoice">
+    <choice correct="true">El cerebro humano trata de manera aislada cada hecho lo que permite que no lo recuerde.</choice>
+    <choice correct="false">Uno de los retos de la ciencia y la tecnología es entender y reproducir el funcionamiento del cerebro humano.</choice>
+    <choice correct="false">En el cerebro humano, la manipulación del conocimiento incorpora relaciones y hechos.</choice>
+  </choicegroup>
+</multiplechoiceresponse>
+
+<p>Seleccione el literal que es verdadero.</p>
+<multiplechoiceresponse>
+  <choicegroup label="Seleccione el literal que es verdadero." type="MultipleChoice">
+    <choice correct="false">Las computadoras dominan el lenguaje natural.</choice>
+    <choice correct="false">Los sistemas expertos modernos están basados solo en bases de conocimiento que representan las ideas de un campo específico de destreza.</choice>
+    <choice correct="true">El reconocimiento de patrones implica la identificación de patrones repetitivos en los datos de entrada con el objetivo de entenderla o clasificarla.</choice>
+  </choicegroup>
+</multiplechoiceresponse>
+
+
+</problem>

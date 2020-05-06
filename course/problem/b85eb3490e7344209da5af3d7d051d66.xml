@@ -1,0 +1,146 @@
+<problem display_name="Multiple Choice" markdown="&gt;&gt;Del tema referente a la anatomía básica de una red, seleccione la que está fuera de contexto:&lt;&lt;&#10;(x) Las personas que se encuentran en red se convierten en seres independientes que ya no requieren comunicación gracias a las ventajas de la red. &#10;( ) Las redes giran en torno a tres componentes esenciales de toda red de computadoras: hardware, software y personas.&#10;( ) Las redes permiten que gracias a las equipos (hardware) y programas de software se compartan información y recursos.&#10;&#10;&gt;&gt;En una red de computadoras, cuál de los siguientes medios de transmisión es más rápido.&lt;&lt;&#10;(x) Fibra Optica &#10;( ) Par trenzado&#10;( ) Bluetooth&#10;( ) Módem&#10;&#10;&gt;&gt;De los siguientes tipos de red, ¿cuál es la que abarca un área más pequeña?&lt;&lt;&#10;( ) MAN &#10;(x) LAN&#10;( ) WAN&#10;&#10;&gt;&gt;Seleccione la opción que representa una dirección IP&lt;&lt;&#10;(x) 172.16.50.54 &#10;( ) 142.51.4.44.0.0&#10;( ) www.utpl.edu.ec&#10;&#10;&gt;&gt;Señale el enunciado que corresponde al concepto de Intranet&lt;&lt;&#10;( ) El comercio electrónico se desarrolla a través de extranets, de tipo B2B, que consiste en transacciones que tengan que ver con empresas que ofrecen productos o servicios a otras empresas.&#10;( ) Redes TCP/IP, diseñadas para su uso externo por parte de clientes, proveedores y miembros de la organización a la que pertenece.&#10;(x) Redes que se realizan dentro de una organización utilizando tecnología Internet cuyos servicios que ofrece están a disposición solo para los miembros de la organización. &#10;&#10;&gt;&gt;Las redes de computadoras me permiten compartir:&lt;&lt;&#10;[ ] Energía eléctrica&#10;[x] Información&#10;[ ] Correos electrónicos&#10;[x] Servicios&#10;[x] Recursos&#10;[ ] Protocolos&#10;&#10;&gt;&gt;¿Cuál de las siguientes proposiciones considera que definen el ancho de banda?&lt;&lt;&#10;( ) Tipo de información transmitida en determinada cantidad de tiempo. &#10;(x) Cantidad de información transmitida a través de un medio y en determinada cantidad de tiempo.&#10;( ) Cantidad de bits transmitidos por un tipo de cable en determinada cantidad de tiempo.&#10;&#10;&gt;&gt;Los protocolos de red...&lt;&lt;&#10;(x) Son reglas para intercambio de datos entre una terminal y una computadora o dos computadoras. &#10;( ) Trabajan exclusivamente en redes de área local  para desempeñar diversas tareas.&#10;( ) Se conectan mediante cables, ondas de radio o una combinación de módems y líneas telefónicas.&#10;&#10;&gt;&gt;Señale el item que corresponde a las ventajas de la comunicación online:&lt;&lt;&#10;[x] Comunicación en tiempo real &#10;[ ] Vulnerabilidades que permiten acceso a personas ajenas a una entidad.&#10;[x] Acceso a Internet&#10;[ ] Longitudes de canales limitadas&#10;[ ] Mal uso de las redes para cometer delitos cibernéticos&#10;[ ] Si el nodo central falla toda la red se desconecta&#10;[x] Trabajo en grupo, manejo de redes de trabajo colaborativo a través de aplicaciones como Google Drive y Dropbox&#10;&#10;&gt;&gt;¿Cuál de los siguientes ejemplos no corresponde a una medida de seguridad informática?&lt;&lt;&#10;( ) Utilización de Firewal para proteger una red interna y evitar los accesos no autorizados. &#10;(x) Escribir en varios lugares la contraseña de mis cuentas y tarjetas de crédito para no olvidarlas.&#10;( ) Realizar copias de seguridad de los archivos más importantes de una organización.&#10;&#10;&gt;&gt;Existen varios criterios de clasificación de redes, entre otros está la clasificación según el área que cubre. Señale cuál de los siguientes conceptos es correcto:&lt;&lt;&#10;(x) Las redes LAN son aquellas que se encuentran en áreas pequeñas, físicamente cerca. &#10;( ) En una red inalámbrica cada nodo es conocido con el nombre de “par trenzado”.&#10;( ) Para realizar el mantenimiento y seguimiento de redes es necesario un protocolo de red.&#10;&#10;&gt;&gt;Actualmente, a nuestro alrededor podemos observar que las redes más utilizadas son las redes LAN y WAN, la conexión con Internet casi en cualquier parte para comunicarse con otras redes en el planeta se realiza gracias a:&lt;&lt;&#10;(x) Puentes, gateways, routers.&#10;( ) Módem fax &#10;( ) Puertos USB, Fire Wire&#10;&#10;&gt;&gt;Escoja la opción que describa a la World Wide Web (WWW)&lt;&lt;&#10;( ) Es un localizador universal de recursos, un localizador de nombres. &#10;(x) Es un sistema de visualización y búsqueda distribuida de páginas web.&#10;( ) Es un lenguaje utilizado para el desarrollo de páginas web.&#10;&#10;&gt;&gt;Una tarjeta de interfaz de red:&lt;&lt;&#10;( ) Se está sustituyendo  por tecnología más moderna  como puertos USB y FireWire. &#10;( ) Permite la transmisión de información por distintos caminos.&#10;(x) Añade  un puerto serie especial a la computadora, diseñado para una conexión directa a red.&#10;&#10;&gt;&gt;¿Cómo definiría usted un delito informático?&lt;&lt;&#10;( ) Aquella acción ilícita que se realiza sin conocimientos de informática en un banco. &#10;( ) Una acción lícita que se realiza con el conocimiento de informática.&#10;(x) Aquella acción ilícita que se realiza con el conocimiento o uso de la informática.&#10;" max_attempts="2" showanswer="correct_or_past_due" submission_wait_seconds="60" weight="10.0">
+<p>Del tema referente a la anatomía básica de una red, seleccione la que está fuera de contexto:</p>
+<multiplechoiceresponse>
+  <choicegroup label="Del tema referente a la anatomía básica de una red, seleccione la que está fuera de contexto:" type="MultipleChoice">
+    <choice correct="true">Las personas que se encuentran en red se convierten en seres independientes que ya no requieren comunicación gracias a las ventajas de la red.</choice>
+    <choice correct="false">Las redes giran en torno a tres componentes esenciales de toda red de computadoras: hardware, software y personas.</choice>
+    <choice correct="false">Las redes permiten que gracias a las equipos (hardware) y programas de software se compartan información y recursos.</choice>
+  </choicegroup>
+</multiplechoiceresponse>
+
+<p>En una red de computadoras, cuál de los siguientes medios de transmisión es más rápido.</p>
+<multiplechoiceresponse>
+  <choicegroup label="En una red de computadoras, cuál de los siguientes medios de transmisión es más rápido." type="MultipleChoice">
+    <choice correct="true">Fibra Optica</choice>
+    <choice correct="false">Par trenzado</choice>
+    <choice correct="false">Bluetooth</choice>
+    <choice correct="false">Módem</choice>
+  </choicegroup>
+</multiplechoiceresponse>
+
+<p>De los siguientes tipos de red, ¿cuál es la que abarca un área más pequeña?</p>
+<multiplechoiceresponse>
+  <choicegroup label="De los siguientes tipos de red, ¿cuál es la que abarca un área más pequeña?" type="MultipleChoice">
+    <choice correct="false">MAN</choice>
+    <choice correct="true">LAN</choice>
+    <choice correct="false">WAN</choice>
+  </choicegroup>
+</multiplechoiceresponse>
+
+<p>Seleccione la opción que representa una dirección IP</p>
+<multiplechoiceresponse>
+  <choicegroup label="Seleccione la opción que representa una dirección IP" type="MultipleChoice">
+    <choice correct="true">172.16.50.54</choice>
+    <choice correct="false">142.51.4.44.0.0</choice>
+    <choice correct="false">www.utpl.edu.ec</choice>
+  </choicegroup>
+</multiplechoiceresponse>
+
+<p>Señale el enunciado que corresponde al concepto de Intranet</p>
+<multiplechoiceresponse>
+  <choicegroup label="Señale el enunciado que corresponde al concepto de Intranet" type="MultipleChoice">
+    <choice correct="false">El comercio electrónico se desarrolla a través de extranets, de tipo B2B, que consiste en transacciones que tengan que ver con empresas que ofrecen productos o servicios a otras empresas.</choice>
+    <choice correct="false">Redes TCP/IP, diseñadas para su uso externo por parte de clientes, proveedores y miembros de la organización a la que pertenece.</choice>
+    <choice correct="true">Redes que se realizan dentro de una organización utilizando tecnología Internet cuyos servicios que ofrece están a disposición solo para los miembros de la organización.</choice>
+  </choicegroup>
+</multiplechoiceresponse>
+
+<p>Las redes de computadoras me permiten compartir:</p>
+<choiceresponse>
+  <checkboxgroup label="Las redes de computadoras me permiten compartir:">
+    <choice correct="false">Energía eléctrica</choice>
+    <choice correct="true">Información</choice>
+    <choice correct="false">Correos electrónicos</choice>
+    <choice correct="true">Servicios</choice>
+    <choice correct="true">Recursos</choice>
+    <choice correct="false">Protocolos</choice>
+  </checkboxgroup>
+</choiceresponse>
+
+<p>¿Cuál de las siguientes proposiciones considera que definen el ancho de banda?</p>
+<multiplechoiceresponse>
+  <choicegroup label="¿Cuál de las siguientes proposiciones considera que definen el ancho de banda?" type="MultipleChoice">
+    <choice correct="false">Tipo de información transmitida en determinada cantidad de tiempo.</choice>
+    <choice correct="true">Cantidad de información transmitida a través de un medio y en determinada cantidad de tiempo.</choice>
+    <choice correct="false">Cantidad de bits transmitidos por un tipo de cable en determinada cantidad de tiempo.</choice>
+  </choicegroup>
+</multiplechoiceresponse>
+
+<p>Los protocolos de red...</p>
+<multiplechoiceresponse>
+  <choicegroup label="Los protocolos de red..." type="MultipleChoice">
+    <choice correct="true">Son reglas para intercambio de datos entre una terminal y una computadora o dos computadoras.</choice>
+    <choice correct="false">Trabajan exclusivamente en redes de área local  para desempeñar diversas tareas.</choice>
+    <choice correct="false">Se conectan mediante cables, ondas de radio o una combinación de módems y líneas telefónicas.</choice>
+  </choicegroup>
+</multiplechoiceresponse>
+
+<p>Señale el item que corresponde a las ventajas de la comunicación online:</p>
+<choiceresponse>
+  <checkboxgroup label="Señale el item que corresponde a las ventajas de la comunicación online:">
+    <choice correct="true">Comunicación en tiempo real </choice>
+    <choice correct="false">Vulnerabilidades que permiten acceso a personas ajenas a una entidad.</choice>
+    <choice correct="true">Acceso a Internet</choice>
+    <choice correct="false">Longitudes de canales limitadas</choice>
+    <choice correct="false">Mal uso de las redes para cometer delitos cibernéticos</choice>
+    <choice correct="false">Si el nodo central falla toda la red se desconecta</choice>
+    <choice correct="true">Trabajo en grupo, manejo de redes de trabajo colaborativo a través de aplicaciones como Google Drive y Dropbox</choice>
+  </checkboxgroup>
+</choiceresponse>
+
+<p>¿Cuál de los siguientes ejemplos no corresponde a una medida de seguridad informática?</p>
+<multiplechoiceresponse>
+  <choicegroup label="¿Cuál de los siguientes ejemplos no corresponde a una medida de seguridad informática?" type="MultipleChoice">
+    <choice correct="false">Utilización de Firewal para proteger una red interna y evitar los accesos no autorizados.</choice>
+    <choice correct="true">Escribir en varios lugares la contraseña de mis cuentas y tarjetas de crédito para no olvidarlas.</choice>
+    <choice correct="false">Realizar copias de seguridad de los archivos más importantes de una organización.</choice>
+  </choicegroup>
+</multiplechoiceresponse>
+
+<p>Existen varios criterios de clasificación de redes, entre otros está la clasificación según el área que cubre. Señale cuál de los siguientes conceptos es correcto:</p>
+<multiplechoiceresponse>
+  <choicegroup label="Existen varios criterios de clasificación de redes, entre otros está la clasificación según el área que cubre. Señale cuál de los siguientes conceptos es correcto:" type="MultipleChoice">
+    <choice correct="true">Las redes LAN son aquellas que se encuentran en áreas pequeñas, físicamente cerca.</choice>
+    <choice correct="false">En una red inalámbrica cada nodo es conocido con el nombre de “par trenzado”.</choice>
+    <choice correct="false">Para realizar el mantenimiento y seguimiento de redes es necesario un protocolo de red.</choice>
+  </choicegroup>
+</multiplechoiceresponse>
+
+<p>Actualmente, a nuestro alrededor podemos observar que las redes más utilizadas son las redes LAN y WAN, la conexión con Internet casi en cualquier parte para comunicarse con otras redes en el planeta se realiza gracias a:</p>
+<multiplechoiceresponse>
+  <choicegroup label="Actualmente, a nuestro alrededor podemos observar que las redes más utilizadas son las redes LAN y WAN, la conexión con Internet casi en cualquier parte para comunicarse con otras redes en el planeta se realiza gracias a:" type="MultipleChoice">
+    <choice correct="true">Puentes, gateways, routers.</choice>
+    <choice correct="false">Módem fax</choice>
+    <choice correct="false">Puertos USB, Fire Wire</choice>
+  </choicegroup>
+</multiplechoiceresponse>
+
+<p>Escoja la opción que describa a la World Wide Web (WWW)</p>
+<multiplechoiceresponse>
+  <choicegroup label="Escoja la opción que describa a la World Wide Web (WWW)" type="MultipleChoice">
+    <choice correct="false">Es un localizador universal de recursos, un localizador de nombres.</choice>
+    <choice correct="true">Es un sistema de visualización y búsqueda distribuida de páginas web.</choice>
+    <choice correct="false">Es un lenguaje utilizado para el desarrollo de páginas web.</choice>
+  </choicegroup>
+</multiplechoiceresponse>
+
+<p>Una tarjeta de interfaz de red:</p>
+<multiplechoiceresponse>
+  <choicegroup label="Una tarjeta de interfaz de red:" type="MultipleChoice">
+    <choice correct="false">Se está sustituyendo  por tecnología más moderna  como puertos USB y FireWire.</choice>
+    <choice correct="false">Permite la transmisión de información por distintos caminos.</choice>
+    <choice correct="true">Añade  un puerto serie especial a la computadora, diseñado para una conexión directa a red.</choice>
+  </choicegroup>
+</multiplechoiceresponse>
+
+<p>¿Cómo definiría usted un delito informático?</p>
+<multiplechoiceresponse>
+  <choicegroup label="¿Cómo definiría usted un delito informático?" type="MultipleChoice">
+    <choice correct="false">Aquella acción ilícita que se realiza sin conocimientos de informática en un banco.</choice>
+    <choice correct="false">Una acción lícita que se realiza con el conocimiento de informática.</choice>
+    <choice correct="true">Aquella acción ilícita que se realiza con el conocimiento o uso de la informática.</choice>
+  </choicegroup>
+</multiplechoiceresponse>
+
+
+</problem>

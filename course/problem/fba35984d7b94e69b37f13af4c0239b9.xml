@@ -1,0 +1,108 @@
+<problem display_name="Test Semana 2" markdown="null" max_attempts="2" weight="10.0">
+<p>Evaluación Semanal</p>
+<p>Tema: Conceptos básicos de base de datos</p>
+
+<p>Una base de datos permite:</p>
+<multiplechoiceresponse>
+  <choicegroup label="Una base de datos permite:" type="MultipleChoice">
+    <choice correct="true">Almacenar, organizar, recuperar, administrar información de manera ordenada.</choice>
+    <choice correct="false">Realizar una distribución de información de acuerdo a una plantilla estándar.</choice>
+    <choice correct="false">Guarda en un medio físico una gran cantidad de información.</choice>
+  </choicegroup>
+</multiplechoiceresponse>
+
+<p>Indique cuál de las siguientes afirmaciones constituye una ventaja de las bases de datos:</p>
+<multiplechoiceresponse>
+  <choicegroup label="Indique cuál de las siguientes afirmaciones constituye una ventaja de las bases de datos:" type="MultipleChoice">
+    <choice correct="false">Con las bases de datos los riesgos de delitos informáticos son varios ya que la información está disponible a través de redes informáticas.</choice>
+    <choice correct="true">Gracias a los servidores y las bases de datos es posible procesar gran cantidad de información sincrónicamente desde varias terminales.</choice>
+    <choice correct="false">En las bases de datos se guardan también información personal, pero si no se aplica políticas de seguridad adecuadas, no se garantiza la privacidad de dicha información.</choice>
+  </choicegroup>
+</multiplechoiceresponse>
+
+<p>De las siguientes afirmaciones sobre las bases de datos, elija la que resulta ser falsa.</p>
+<multiplechoiceresponse>
+  <choicegroup label="De las siguientes afirmaciones sobre las bases de datos, elija la que resulta ser falsa." type="MultipleChoice">
+    <choice correct="false">Podemos realizar consultas a las bases de datos para obtener información utilizando sentencias SQL.</choice>
+    <choice correct="true">A una base de datos, únicamente puede acceder un usuario a la vez.</choice>
+    <choice correct="false">Las bases de datos están compuestas de tablas, que son conjuntos de registros, y éstos son conjuntos de campos en los cuales se guarda información.</choice>
+  </choicegroup>
+</multiplechoiceresponse>
+
+<p>Indique cuál de las siguientes opciones es incorrecta</p>
+<multiplechoiceresponse>
+  <choicegroup label="Indique cuál de las siguientes opciones es incorrecta" type="MultipleChoice">
+    <choice correct="false">Las bases de datos son de gran utilidad porque pueden almacenar grandes cantidades de información.</choice>
+    <choice correct="true">Una base de datos relacional, por definición contiene más de 1000 registros y campos relacionados.</choice>
+    <choice correct="false">El sistema de almacenamiento de contactos de celular es un programa especializado de base de datos.</choice>
+  </choicegroup>
+</multiplechoiceresponse>
+
+<p>De los siguientes ejemplos escoga, cuales son base de datos open source</p>
+<choiceresponse>
+  <checkboxgroup label="De los siguientes ejemplos escoga, cuales son base de datos open source">
+    <choice correct="false">Oracle.</choice>
+    <choice correct="true">MySql</choice>
+    <choice correct="true">María DB</choice>
+    <choice correct="true">PostgreSQL.</choice>
+  </checkboxgroup>
+</choiceresponse>
+
+<p>Analice la siguiente tabla de TELEFONOS e identifique la opción de respuesta correcta:</p>
+  <html>
+    <img class="img-responsive img-rounded" src="/static/telf.png" width="828" height="148" alt="Tabla"/>
+  </html>
+<multiplechoiceresponse>
+  <choicegroup label="Analice la siguiente tabla de TELEFONOS e identifique la opción de respuesta correcta:" type="MultipleChoice">
+    <choice correct="false">En el tercer registro de la tabla TELEFONOS, el campo apellido corresponde a “Salinas”.</choice>
+    <choice correct="true">En el segundo registro de la tabla TELEFONOS, el campo nombre corresponde a “Augusto”.</choice>
+    <choice correct="false">En el primer registro de la tabla TELEFONOS, el campo cédula corresponde a “0765378941”..</choice>
+  </choicegroup>
+</multiplechoiceresponse>
+
+<p>Si tenemos inicialmente la siguiente tabla de información de estudiantes</p>
+  <html>
+    <img class="img-responsive img-rounded" src="/static/telefono.png" width="828" height="148" alt="Tabla Inicial"/>
+  </html>
+<p>Qué operación se ha aplicado para tener como resultado la siguiente tabla</p>
+      <html>
+    <img class="img-responsive img-rounded" src="/static/inicial.png" width="828" height="148" alt="Tabla Inicial"/>
+  </html>
+<multiplechoiceresponse>
+  <choicegroup label="Si tenemos inicialmente la siguiente tabla de información de estudiantes" type="MultipleChoice">
+    <choice correct="false">Eliminar.</choice>
+    <choice correct="true">Insertar.</choice>
+    <choice correct="false">Ordenar.</choice>
+  </choicegroup>
+</multiplechoiceresponse>
+
+<p>Señale la jerarquía correcta de una base de datos:</p>
+<multiplechoiceresponse>
+  <choicegroup label="Señale la jerarquía correcta de una base de datos:" type="MultipleChoice">
+    <choice correct="false">Base de datos, campos, registros, datos, tablas.</choice>
+    <choice correct="false">Registros, base de datos, campos, tablas, datos.</choice>
+    <choice correct="true">Base de datos, tablas, registros, campos, datos.</choice>
+  </choicegroup>
+</multiplechoiceresponse>
+
+<p>Cuales de las siguientes Base de Datos son NO RELACIONALES:</p>
+<choiceresponse>
+  <checkboxgroup label="Cuales de las siguientes Base de Datos son NO RELACIONALES:">
+    <choice correct="false">MySql</choice>
+    <choice correct="false">María DB</choice>
+    <choice correct="true">Couchbase Server</choice>
+    <choice correct="false">PostgreSQL</choice>
+    <choice correct="true">Mongo DB</choice>
+  </checkboxgroup>
+</choiceresponse>
+<p>Para las labores de manipulación de información, las personas utilizan bases de datos en lugar de sistemas basados en papel por una de las siguientes razones:</p>
+<multiplechoiceresponse>
+  <choicegroup label="De las siguientes afirmaciones sobre las bases de datos, elija la que resulta ser falsa:" type="MultipleChoice">
+    <choice correct="false">Las bases de datos facilitan la violación de sistemas informáticos que contienen grandes cantidades de información.</choice>
+    <choice correct="true">Las bases de datos permiten recuperar información de un modo más rápido y flexible.</choice>
+    <choice correct="false">Las bases de datos hacen compleja la tarea de organización al momento de enlazar sistemas..</choice>
+  </choicegroup>
+</multiplechoiceresponse>
+
+
+</problem>

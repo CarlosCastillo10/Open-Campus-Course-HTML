@@ -1,2 +1,19 @@
-# Open-Campus-Course-HTML
-Repositorio de alojamiento de transformacion de informacion en formato html de los cursos de Open-Campus
+## TRANSFORMACIÓN DE INFORMACIÓN A FORMATO HTML
+
+### 1. Instalar
+Ubiquese en el repositorio clonado
+	cd Nombre-Repostirio
+
+Luego instale el sript
+	source setup.sh
+
+### 2. Use demo-convert.py
+* Exporte el curso de edX
+* Descomprima el archivo .tar.gz 
+* cd Nombre-Curso
+* Ejecute demo-convert.py
+
+		demo-convert.py
+	
+* El script le generá una carpeta dentro del curso llamada 'course-html'.
+* Importante: En la linea 505 reemplazar por la ubicación del curso en su computador.

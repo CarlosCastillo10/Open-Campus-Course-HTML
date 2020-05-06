@@ -1,0 +1,42 @@
+.navegacion ul{
+list-style: none;
+}
+
+.menu li a{
+color: #353535;
+font-family: arial;
+text-decoration: none;
+}
+
+.menu li a:hover{
+color: #CE7D35;
+transition: all .3s
+}
+
+.menu>li{
+width: auto;
+height: 20px;
+overflow: hidden;
+font-weight: 600;
+}
+
+.menu>li:hover{
+color: #CE7D35;
+height: auto;
+transition: all .3s;
+}
+
+.submenu>li{
+font-weight: 300;}
+
+.submenu>li>a:hover{
+color: #CE7D35;
+margin-left: 20px;
+}
+
+.submenu li a{
+display: block;
+padding: 15px;
+color" #fff;
+text-decoration: none;
+}

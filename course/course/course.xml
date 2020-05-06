@@ -1,0 +1,14 @@
+<course advanced_modules="[&quot;annotatable&quot;, &quot;word_cloud&quot;, &quot;split_test&quot;, &quot;poll&quot;, &quot;google-document&quot;]" advertised_start="null" catalog_visibility="both" course_image="030.jpg" display_name="Fundamentos informáticos (Edición 3)" end="&quot;2020-06-06T23:59:00+00:00&quot;" enrollment_end="&quot;2020-04-13T05:00:00+00:00&quot;" enrollment_start="&quot;2020-03-13T05:00:00+00:00&quot;" graceperiod="25200 seconds" language="es" minimum_grade_credit="0.8" start="&quot;2020-04-13T05:00:00+00:00&quot;" use_latex_compiler="true">
+  <chapter url_name="f2a7a2e1d02f4678b3bf9f778772d3c8"/>
+  <chapter url_name="92c3416608af4ceaad2d6f8a93074723"/>
+  <chapter url_name="dc2cfb7edfa84935a70f3fb7891134cf"/>
+  <chapter url_name="d1ec9e9c901d4f93888e5d9008e5e188"/>
+  <chapter url_name="1333a094021e40969b8f92dc1aeac5a5"/>
+  <chapter url_name="04b6a251ac314656bf59fb811d6e3908"/>
+  <chapter url_name="1a3a9e609f6649e5aef2d1545a89a469"/>
+  <chapter url_name="66e9054d15794e56aac9449dbfba03f6"/>
+  <chapter url_name="a436cd1a9fa94f1684d26e9c22079556"/>
+  <chapter url_name="6f874aa7ea14409d89a35124e8ed59ab"/>
+  <chapter url_name="e52ff033f15c43099e8772cbca702fa8"/>
+  <wiki slug="UTPL.COMPFUND3.2020_1"/>
+</course>

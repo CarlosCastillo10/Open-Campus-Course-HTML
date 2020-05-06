@@ -1,0 +1,221 @@
+<vertical display_name="Instrucciones">
+  <html url_name="6beab7fea64842878e7698748551201d"/>
+  <openassessment url_name="7e85c16c7cee4b05ab570a135b3a9f49" submission_start="2019-11-19T05:00:00+00:00" submission_due="2019-11-26T23:59:00+00:00" allow_file_upload="False" allow_latex="False">
+    <title>Subir aquí su trabajo</title>
+    <assessments>
+      <assessment name="peer-assessment" must_grade="5" must_be_graded_by="3" start="2019-11-25T05:00:00+00:00" due="2019-12-08T23:59:00+00:00"/>
+    </assessments>
+    <prompts>
+      <prompt>
+        <description>Recuerde revisar los aspectos de la rúbrica, previo a realizar su trabajo.
+
+Tenga en cuenta las fechas límite para subir trabajos y para la revisión de pares.
+
+</description>
+      </prompt>
+    </prompts>
+    <rubric>
+      <criterion feedback="optional">
+        <name>Ideas</name>
+        <label>Preparación</label>
+        <prompt>El video muestra que se ha realizado un guion previo.</prompt>
+        <option points="4">
+          <name>Poor</name>
+          <label>Muy bien</label>
+          <explanation>El guion está bien diseñado y organizado.</explanation>
+        </option>
+        <option points="3">
+          <name>Fair</name>
+          <label>Bien</label>
+          <explanation>El guion está incompleto o pobremente organizado.</explanation>
+        </option>
+        <option points="1">
+          <name>Good</name>
+          <label>Puede mejorar</label>
+          <explanation>No existe un guion o está mal organizado.</explanation>
+        </option>
+      </criterion>
+      <criterion>
+        <name>Content</name>
+        <label>Contenido</label>
+        <prompt>El contenido que observa en el video corresponde a lo solicitado.</prompt>
+        <option points="5">
+          <name>Poor</name>
+          <label>Excelente</label>
+          <explanation>Cubre los ejemplos en profundidad con detalles.
+
+El conocimiento del tema es excelente.
+
+Contempla cada uno de los puntos temáticos solicitados por el docente.
+
+Los contenidos muestran una secuencia lógica. 
+
+</explanation>
+        </option>
+        <option points="4">
+          <name>Fair</name>
+          <label>Muy bien</label>
+          <explanation>Incluye conocimiento básico sobre el tema. 
+
+El contenido es bueno.
+
+Contempla sólo algunos puntos temáticos solicitados por el docente. 
+
+Muestra una secuencia lógica.
+</explanation>
+        </option>
+        <option points="3">
+          <name>Good</name>
+          <label>Bien</label>
+          <explanation>Incluye información esencial sobre el tema, pero tiene 1-2 errores en los ejercicios.
+
+Contempla sólo algunos puntos temáticos solicitados por el docente. 
+
+Muestra una secuencia lógica.
+
+</explanation>
+        </option>
+        <option points="1">
+          <name>Excellent</name>
+          <label>Puede mejorar</label>
+          <explanation>El contenido es mínimo y tiene varios errores en los ejercicios.
+
+Contemplo pocos o ninguno de los contenidos temáticos solicitados por el docente.
+
+ No muestra una secuencia lógica. 
+</explanation>
+        </option>
+      </criterion>
+      <criterion>
+        <name>0</name>
+        <label>Originalidad</label>
+        <prompt>El video muestra el trabajo propuesto con ideas propias del estudiante.</prompt>
+        <option points="5">
+          <name>0</name>
+          <label>Excelente</label>
+          <explanation>El video demuestra gran originalidad. 
+
+Las ideas son creativas e ingeniosas.
+</explanation>
+        </option>
+        <option points="4">
+          <name>1</name>
+          <label>Muy bien</label>
+          <explanation>El video demuestra cierta originalidad. 
+
+El trabajo demuestra el uso de nuevas ideas y de perspicacia.
+</explanation>
+        </option>
+        <option points="3">
+          <name>2</name>
+          <label>Bien</label>
+          <explanation>Usa ideas de otras personas (dándoles crédito), pero no hay casi evidencia de ideas originales.</explanation>
+        </option>
+        <option points="1">
+          <name>3</name>
+          <label>Puede mejorar</label>
+          <explanation>Usa ideas de otras personas, pero no les da crédito.
+
+La mayor parte del material es de trabajos ya hechos y muestra un guión muy básico y lineal. 
+</explanation>
+        </option>
+      </criterion>
+      <criterion>
+        <name>1</name>
+        <label>Uso del lenguaje</label>
+        <prompt>A lo largo del video se utiliza un lenguaje adecuado.</prompt>
+        <option points="5">
+          <name>0</name>
+          <label>Excelente</label>
+          <explanation>No hay faltas de ortografía ni errores gramaticales. El mensaje es claro</explanation>
+        </option>
+        <option points="4">
+          <name>1</name>
+          <label>Muy bien</label>
+          <explanation>Tres o menos faltas de ortografía y/o errores de puntuación. El mensaje es claro.</explanation>
+        </option>
+        <option points="3">
+          <name>2</name>
+          <label>Bien</label>
+          <explanation>Cuatro errores de ortografía y/o errores gramaticales. A veces el mensaje es confuso</explanation>
+        </option>
+        <option points="1">
+          <name>3</name>
+          <label>Puede mejorar</label>
+          <explanation>Más de cuatro errores de ortografía y de gramática. No se entiende el mensaje.</explanation>
+        </option>
+      </criterion>
+      <criterion>
+        <name>2</name>
+        <label>Contribución al aprendizaje sobre el tema</label>
+        <prompt>El video ayudará a otras personas a aprender sobre el tema.</prompt>
+        <option points="5">
+          <name>0</name>
+          <label>Excelente</label>
+          <explanation>Constantemente presenta una reflexión creativa sobre el tema. Consciente de las necesidades de los compañeros, con frecuencia induce a un nuevo debate sobre el tema.</explanation>
+        </option>
+        <option points="4">
+          <name>1</name>
+          <label>Muy bien</label>
+          <explanation>A menudo se presentan las reflexiones que se convierten en esenciales para la discusión del grupo.</explanation>
+        </option>
+        <option points="3">
+          <name>2</name>
+          <label>Bien</label>
+          <explanation>De vez en cuando hace una reflexión significativa sobre el tema.</explanation>
+        </option>
+        <option points="0">
+          <name>3</name>
+          <label>Debe mejorar</label>
+          <explanation>No hace ninguna reflexión sobre el tema.</explanation>
+        </option>
+      </criterion>
+      <criterion>
+        <name>3</name>
+        <label>Duración</label>
+        <prompt>El tiempo de duración del video corresponde a lo solicitado</prompt>
+        <option points="4">
+          <name>0</name>
+          <label>Muy bien</label>
+          <explanation>Se apega al tiempo establecido por el docente.</explanation>
+        </option>
+        <option points="3">
+          <name>1</name>
+          <label>Bien</label>
+          <explanation>Excede o está a -/+de 3 min. Del Tiempo establecido de duración. </explanation>
+        </option>
+        <option points="1">
+          <name>2</name>
+          <label>Puede mejorar</label>
+          <explanation>Excede o Excede o está a -/+de 3 min. Del Tiempo establecido de duración. 
+está a -/+de 5 min. Del Tiempo establecido de duración
+</explanation>
+        </option>
+      </criterion>
+      <criterion>
+        <name>4</name>
+        <label>Créditos</label>
+        <prompt>Como en todo trabajo, se debe citar el uso de recursos de terceros e indicar el autor del video.</prompt>
+        <option points="4">
+          <name>0</name>
+          <label>Muy bien</label>
+          <explanation>Se atribuyen todos los créditos (audio, vídeo e imágenes).</explanation>
+        </option>
+        <option points="3">
+          <name>1</name>
+          <label>Bien</label>
+          <explanation>Se atribuyen los créditos de la mayoría de los recursos utilizados.</explanation>
+        </option>
+        <option points="1">
+          <name>2</name>
+          <label>Puede mejorar</label>
+          <explanation></explanation>
+        </option>
+      </criterion>
+      <feedbackprompt>(Optional) What aspects of this response stood out to you? What did it do well? How could it improve?
+</feedbackprompt>
+      <feedback_default_text>I noticed that this response...
+</feedback_default_text>
+    </rubric>
+  </openassessment>
+</vertical>

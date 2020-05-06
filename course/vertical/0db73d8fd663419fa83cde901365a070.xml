@@ -1,0 +1,93 @@
+<vertical display_name="Reto 01">
+  <html url_name="174d5f2af91c4763a836d1c939ba8904"/>
+  <openassessment url_name="4df73534be874496bb5463b9070c66ea" submission_start="2020-04-22T05:30:00+00:00" submission_due="2020-05-04T23:59:00+00:00" allow_file_upload="False" allow_latex="False">
+    <title>Suba aquí el Reto 01</title>
+    <assessments>
+      <assessment name="peer-assessment" must_grade="5" must_be_graded_by="3" start="2020-05-04T23:59:00+00:00" due="2020-05-18T23:59:00+00:00"/>
+    </assessments>
+    <prompts>
+      <prompt>
+        <description>Tome en cuenta los criterios que se van a utilizar para la evaluación, trabaje su póster en función de esos parámetros.</description>
+      </prompt>
+    </prompts>
+    <rubric>
+      <criterion>
+        <name>0</name>
+        <label>Contenido</label>
+        <prompt>Ha utilizado diversos elementos como texto, imágenes o gráficos, videos y otros recursos para realizar el trabajo</prompt>
+        <option points="5">
+          <name>0</name>
+          <label>Excelente</label>
+          <explanation>Utiliza más de 3 elementos en la línea de tiempo tales como texto, años, imágenes, videos, etc.</explanation>
+        </option>
+        <option points="4">
+          <name>1</name>
+          <label>Bien</label>
+          <explanation>Utiliza más de 3 elementos en la línea de tiempo (por ejemplo: texto, año, imágenes)</explanation>
+        </option>
+        <option points="3">
+          <name>2</name>
+          <label>Regular</label>
+          <explanation>Utiliza solamente 2 elementos en la línea de tiempo (por ejemplo:  texto, e imágenes)</explanation>
+        </option>
+        <option points="1">
+          <name>3</name>
+          <label>Puede mejorar</label>
+          <explanation>Utiliza solo un elemento en la línea de tiempo (ejemplo: sólo texto de descripción o sólo imágenes)</explanation>
+        </option>
+      </criterion>
+      <criterion>
+        <name>1</name>
+        <label>Diseño-Creatividad</label>
+        <prompt>Los elementos de la línea de tiempo están simétricamente distribuidos.</prompt>
+        <option points="5">
+          <name>0</name>
+          <label>Excelente</label>
+          <explanation>Los elementos utilizados en la línea de tiempo se encuentran simétricamente distribuidos</explanation>
+        </option>
+        <option points="4">
+          <name>1</name>
+          <label>Bien</label>
+          <explanation>Los elementos utilizados en la línea de tiempo se encuentran distribuidos, pero podrían distribuirse mejor</explanation>
+        </option>
+        <option points="3">
+          <name>2</name>
+          <label>Regular</label>
+          <explanation>La distribución de los elementos de la línea de tiempo es confusa.</explanation>
+        </option>
+        <option points="1">
+          <name>3</name>
+          <label>Puede mejorar</label>
+          <explanation>No hay una correcta distribución de la línea de tiempo.</explanation>
+        </option>
+      </criterion>
+      <criterion>
+        <name>2</name>
+        <label>Síntesis - redacción</label>
+        <prompt>El lenguaje utilizado es correcto y sabe sintetizar la información que se quiere transmitir</prompt>
+        <option points="5">
+          <name>0</name>
+          <label>Excelente</label>
+          <explanation>Utiliza un lenguaje, preciso. Hace una síntesis para explicar cada generación de computadoras.</explanation>
+        </option>
+        <option points="4">
+          <name>1</name>
+          <label>Bien</label>
+          <explanation>El lenguaje utilizado para explicar cada generación es claro, pero podría mejorar.</explanation>
+        </option>
+        <option points="3">
+          <name>2</name>
+          <label>Regular</label>
+          <explanation>La síntesis que explica cada generación de computadores en la línea de tiempo es confusa, no se entiende.</explanation>
+        </option>
+        <option points="1">
+          <name>3</name>
+          <label>Puede mejorar</label>
+          <explanation>Se detecta que la descripción realizada es una copia de Internet</explanation>
+        </option>
+      </criterion>
+      <feedbackprompt>Recuerde siempre revisar los criterios de evaluación. Debemos estar seguros de lo que aprendemos nos ayudará a evaluar a nuestros compañeros participantes.</feedbackprompt>
+      <feedback_default_text>Este puede ser el primer trabajo que ha realizado bajo esta modalidad, siempre aprendemos de todas nuestras experiencias, así que sigamos adelante!</feedback_default_text>
+    </rubric>
+  </openassessment>
+</vertical>
