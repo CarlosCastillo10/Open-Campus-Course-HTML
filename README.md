@@ -4,7 +4,9 @@
 Ubiquese en el repositorio clonado
 	cd Nombre-Repostirio
 
-Luego instale el sript source setup.sh
+Luego instale el sript 
+	
+		source setup.sh
 
 ### 2. Use demo-convert.py
 * Exporte el curso de edX
