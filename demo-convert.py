@@ -11,6 +11,7 @@ import unicodedata
 import xml.etree.ElementTree as ET 
 from shutil import rmtree
 import os, fnmatch
+import pafy
 
 
 class Doc:
@@ -60,16 +61,24 @@ class Doc:
         file_path = '%s/static/'%(str(self.path))
         files_to_rename = fnmatch.filter(os.listdir(file_path), '*.*')
 
-        for file_name in files_to_rename:    
-            os.rename(file_path + file_name, file_path + file_name.replace('_', '-'))
-            os.rename(file_path + file_name, file_path + file_name.replace(' ', '-'))
+        for file_name in files_to_rename: 
+            if '_' in file_name:   
+                os.rename(file_path + file_name, file_path + file_name.replace('_', '-'))
+            if ' 'in file_name:
+                os.rename(file_path + file_name, file_path + file_name.replace(' ', '-'))
     
     def obtener_video(self, archivo):
 
         tree = ET.parse(str(archivo))
         root = tree.getroot()
         url = (root.attrib['youtube_id_1_0'])
+        self.url_video = 'https://www.youtube.com/watch?v=%s'%url
         return("https://www.youtube.com/embed/%s" % url)
+
+    def obtener_titulo_video(self):
+        video = pafy.new(self.url_video)
+        return video.title
+
     
     # Obtener menu principal
     def __makeDraftStruct(self):
@@ -107,11 +116,13 @@ class Doc:
 
         ## variables  numericas
         self.first_page = ''
+        self.num_chapts = 0
         self.num_seq = 0
         self.num_units = 0
         self.num_pages = 0
         self.num_drafts = 0
         self.tmp_name_equal = ''
+        self.url_video = ''
         self.type_content = 0
 
         # Variables de Path
@@ -214,12 +225,14 @@ class Doc:
             frame_izquierdo.write('<li><a href="#">%s</a>'%chap_name)
             
             # Nombre del directorio
-            namePath_html = '%s'%(self.eliminar_carateres_especiales(chap_name.replace(' ','-')))
-            
-            # Crear directorios
+            namePath_html = '%s'%(self.eliminar_carateres_especiales(chap_name.replace(' ','-').lower()))
+            if os.path.isdir('%s/course-html/content/%s'%(str(self.path), namePath_html)):
+                self.num_chapts =+ 1
+                namePath_html = '%s-%d'%(namePath_html,self.num_chapts)
+           
             os.mkdir('%s/course-html/content/%s'%(str(self.path),namePath_html))
             
-            namePath = self.eliminar_carateres_especiales(chap_name.replace(' ','-'))
+            namePath = self.eliminar_carateres_especiales(chap_name.replace(' ','-').lower())
             
             self.pathsHtml.append(namePath_html)
             #index.write('<section><h1> %s</h1></section>\n'%(chap_name))
@@ -438,6 +451,7 @@ class Doc:
                 pFile = self.path / pro[0] / pro_name
                 frame_derecho.write('<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
                     'frameborder=»0″></iframe>\n'%self.obtener_video(pFile))
+                #print(self.obtener_titulo_video())
 
                 
         return pub_prob, pro_list
