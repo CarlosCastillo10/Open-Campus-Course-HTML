@@ -17,4 +17,4 @@ Luego instale el sript
 		demo-convert.py
 	
 * El script le generá una carpeta dentro del curso llamada 'course-html'.
-* Importante: En la linea writeDoc = Doc('/home/carloscastillo/Escritorio/course') reemplazar por la ubicación del curso en su computador.
+
