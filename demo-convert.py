@@ -54,6 +54,9 @@ class Doc:
         palabra = palabra.replace('?','')
         palabra = palabra.replace('¿','')
         palabra = palabra.replace(':','')
+        palabra = palabra.replace('(','')
+        palabra = palabra.replace(')','')
+        palabra = palabra.replace('/','')
         return palabra
 
     def limpiar_archivos(self):
@@ -68,12 +71,13 @@ class Doc:
                 os.rename(file_path + file_name, file_path + file_name.replace(' ', '-'))
     
     def obtener_video(self, archivo):
-
         tree = ET.parse(str(archivo))
         root = tree.getroot()
-        url = (root.attrib['youtube_id_1_0'])
-        self.url_video = 'https://www.youtube.com/watch?v=%s'%url
-        return("https://www.youtube.com/embed/%s" % url)
+        if 'youtube_id_1_0' in root.attrib:
+            url = (root.attrib['youtube_id_1_0'])
+            self.url_video = 'https://www.youtube.com/watch?v=%s'%url
+            return("https://www.youtube.com/embed/%s" % url)
+        return 0
 
     def obtener_titulo_video(self):
         video = pafy.new(self.url_video)
@@ -212,43 +216,44 @@ class Doc:
             # build path
             c += '.xml'
             cFile = self.chapter_path / c
-            aux_cFile = '%s/%s'%(self.aux_chapter_path, c)
-            chap_txt = cFile.open().readlines()
-            cFile = cFile.relative_to(*cFile.parts[:1])
+            if os.path.isfile(str(cFile)):
+                aux_cFile = '%s/%s'%(self.aux_chapter_path, c)
+                chap_txt = cFile.open().readlines()
+                cFile = cFile.relative_to(*cFile.parts[:1])
 
-            first_line = chap_txt[0]
-            chap_name = first_line.split('"')[1]
+                first_line = chap_txt[0]
+                chap_name = first_line.split('"')[1]
 
-            readme.write('* [Section] {0} - [{1}]({1})\n'.format(chap_name, aux_cFile))
+                readme.write('* [Section] {0} - [{1}]({1})\n'.format(chap_name, aux_cFile))
 
-            # Formar menu principal
-            frame_izquierdo.write('<li><a href="#">%s</a>'%chap_name)
-            
-            # Nombre del directorio
-            namePath_html = '%s'%(self.eliminar_carateres_especiales(chap_name.replace(' ','-').lower()))
-            if os.path.isdir('%s/course-html/content/%s'%(str(self.path), namePath_html)):
-                self.num_chapts =+ 1
-                namePath_html = '%s-%d'%(namePath_html,self.num_chapts)
-           
-            os.mkdir('%s/course-html/content/%s'%(str(self.path),namePath_html))
-            
-            namePath = self.eliminar_carateres_especiales(chap_name.replace(' ','-').lower())
-            
-            self.pathsHtml.append(namePath_html)
-            #index.write('<section><h1> %s</h1></section>\n'%(chap_name))
+                # Formar menu principal
+                frame_izquierdo.write('<li><a href="#">%s</a>'%chap_name)
+                
+                # Nombre del directorio
+                namePath_html = '%s'%(self.eliminar_carateres_especiales(chap_name.replace(' ','-').lower()))
+                if os.path.isdir('%s/course-html/content/%s'%(str(self.path), namePath_html)):
+                    self.num_chapts =+ 1
+                    namePath_html = '%s-%d'%(namePath_html,self.num_chapts)
+               
+                os.mkdir('%s/course-html/content/%s'%(str(self.path),namePath_html))
+                
+                namePath = self.eliminar_carateres_especiales(chap_name.replace(' ','-').lower())
+                
+                self.pathsHtml.append(namePath_html)
+                #index.write('<section><h1> %s</h1></section>\n'%(chap_name))
 
-            # eliminar el item inicial
-            seq_list = [l.split('"')[1] for l in chap_txt if "sequential" in l]
+                # eliminar el item inicial
+                seq_list = [l.split('"')[1] for l in chap_txt if "sequential" in l]
 
 
-            pub_seq_struct, all_seq_struct = self.describeSequen(seq_list, readme, frame_izquierdo, namePath)
-            frame_izquierdo.write('</li>\n')
+                pub_seq_struct, all_seq_struct = self.describeSequen(seq_list, readme, frame_izquierdo, namePath)
+                frame_izquierdo.write('</li>\n')
 
-            ### estructura publica
-            self.public_problems_struct[chap_name] = pub_seq_struct
+                ### estructura publica
+                self.public_problems_struct[chap_name] = pub_seq_struct
 
-            self.all_problems_struct['('+c[-9:-4]+')'+chap_name] = (str(cFile), all_seq_struct)
-        #print(self.pathsHtml)
+                self.all_problems_struct['('+c[-9:-4]+')'+chap_name] = (str(cFile), all_seq_struct)
+            #print(self.pathsHtml)
 
         self.public_problems_struct = dict((k, v) for k, v in self.public_problems_struct.items() if v)
 
