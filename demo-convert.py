@@ -510,9 +510,10 @@ if __name__ == "__main__":
         pass
     else:
         folder_name = sys.argv[1]
-
+        os.getcwd()
     # Aqui cambiar por la ruta donde tienen alojado el curso descargado.
-    writeDoc = Doc('/home/carloscastillo/Escritorio/course')
+    #writeDoc = Doc('/home/carloscastillo/Escritorio/course')
+    writeDoc = Doc(os.getcwd())
     writeDoc.describeCourse()
     #all_prob_dict = writeDoc.all_problems_struct
 
