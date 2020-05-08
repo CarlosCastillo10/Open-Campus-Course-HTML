@@ -10,6 +10,7 @@ import os
 import unicodedata
 import xml.etree.ElementTree as ET 
 from shutil import rmtree
+import os, fnmatch
 
 
 class Doc:
@@ -54,6 +55,15 @@ class Doc:
         palabra = palabra.replace(':','')
         return palabra
 
+    def limpiar_archivos(self):
+
+        file_path = '%s/static/'%(str(self.path))
+        files_to_rename = fnmatch.filter(os.listdir(file_path), '*.*')
+
+        for file_name in files_to_rename:    
+            os.rename(file_path + file_name, file_path + file_name.replace('_', '-'))
+            os.rename(file_path + file_name, file_path + file_name.replace(' ', '-'))
+    
     def obtener_video(self, archivo):
 
         tree = ET.parse(str(archivo))
@@ -100,7 +110,9 @@ class Doc:
         self.num_seq = 0
         self.num_units = 0
         self.num_pages = 0
+        self.num_drafts = 0
         self.tmp_name_equal = ''
+        self.type_content = 0
 
         # Variables de Path
         self.path = Path(start_path)
@@ -131,10 +143,14 @@ class Doc:
         self.public_problems_struct = OrderedDict()
         self.all_problems_struct = OrderedDict()
 
+        self.limpiar_archivos()
+
         ## obtener estructura del curso
         self.__makeCourse()
+
         if self.draft_path.exists() and self.draft_vert_path.exists():
             self.__makeDraftStruct()
+            
 
 
     def describeCourse(self):
@@ -170,7 +186,7 @@ class Doc:
             'scrolling="yes">\n<frame src="content/frame-izquierdo.html" name="izquierdo"</frame>\n'
             '<frame src="content/%s" name="derecho"></frame>\n</frameset>\n</frameset>\n</html'%(nameCourse,
                 "18%","10%","10%","20%","10%","30%",self.first_page))
-        
+
         frame_izquierdo.write('</ul>\n</nav>\n</body>\n</html>')
         readme.close()
         index.close()
@@ -282,7 +298,7 @@ class Doc:
                 if s not in self.draft_problems_struct.keys():
                     all_dict = OrderedDict()
                 else:
-
+                    all_dict = self.describeDraftUnit(self.draft_problems_struct[s], readme, frame_izquierdo, sequ_name, path)
                 all_seq['('+s_name[-9:-4]+')'+sequ_name] = (str(sFile), all_dict)
 
         frame_izquierdo.write('</ul>\n')
@@ -320,6 +336,7 @@ class Doc:
                         , aux_u_name.lower()))
                 frame_izquierdo.write('<li><a href="%s/%s/%s/%s.html" target="derecho">%s</a></li>\n'%(path,aux_sequ_name.lower(),aux_u_name.lower(),aux_u_name.lower(),u_name))
                 frame_derecho = open(str(self.path)+'/course-html/content/%s/%s/%s/%s.html'%(path,aux_sequ_name.lower(),aux_u_name.lower(),aux_u_name.lower()), 'w')
+                self.type_content = 1
             else:
                 frame_izquierdo.write('<li><a href="%s/%s/%s.html" target="derecho">%s</a></li>\n'%(path,aux_sequ_name.lower(),aux_u_name.lower(),sequ_name))
                 if(self.num_pages == 0):
@@ -327,6 +344,7 @@ class Doc:
                     self.num_pages+=1
                  # Crear los archivos.html en el directorio creado para cada section
                 frame_derecho = open(str(self.path)+'/course-html/content/%s/%s/%s.html'%(path,aux_sequ_name.lower(),aux_u_name.lower()), 'w')
+                self.type_content = 0
            
             
             prob_list = []
@@ -408,8 +426,11 @@ class Doc:
                     #print(str(p_txt_html))
                     for text in p_txt_html:
                         for line in text.split('\n'):
-                            #line = line.replace('/static/','../static/')
-                            frame_derecho.write('%s\n'%line.replace('/static/','../static/'))
+                            line = line.replace('_','-')
+                            if self.type_content == 0:
+                                frame_derecho.write('%s\n'%line.replace('/static/','../../../../static/'))
+                            else:
+                                frame_derecho.write('%s\n'%line.replace('/static/','../../../../../static/'))
                 
                 pro_list.append((str(pFile), pro[0]))
             elif pro[0] == 'video':
@@ -423,6 +444,7 @@ class Doc:
 
     # Obtener informacion de unidades
     def describeDraftUnit(self, unit, readme, frame_izquierdo,sequ_name, path):
+        aux_sequ_name = self.eliminar_carateres_especiales(sequ_name).replace(' ','-')
         all_uni = OrderedDict()
         for u in unit:
             uFile = Path(u[0])
@@ -431,20 +453,43 @@ class Doc:
             first_line = uFile.open().readlines()[0]
             uFile = uFile.relative_to(*uFile.parts[:1])
             u_name = first_line.split('"')[1]
+            aux_u_name = self.eliminar_carateres_especiales(u_name.replace(' ','-'))
+            
+            if os.path.isdir('%s/course-html/content/%s/%s/%s'%(str(self.path), path, self.eliminar_carateres_especiales(sequ_name).replace(' ','-').lower()
+                ,aux_u_name.lower())):
+                self.num_drafts+=1
+                aux_u_name = '%s-%d'%(aux_u_name,self.num_drafts)
+            
+            os.mkdir('%s/course-html/content/%s/%s/%s'%(str(self.path), path, self.eliminar_carateres_especiales(sequ_name).replace(' ','-').lower()
+                , aux_u_name.lower()))
+            
+            frame_izquierdo.write('<li><a href="%s/%s/%s/%s.html" target="derecho">%s</a></li>\n'%(path,aux_sequ_name.lower(),
+                aux_u_name.lower(),aux_u_name.lower(),u_name))
+
+            frame_derecho = open(str(self.path)+'/course-html/content/%s/%s/%s/%s.html'%(path,aux_sequ_name.lower(),aux_u_name.lower(),aux_u_name.lower()), 'w')
+
             readme.write('\t\t* [Unit]\(Draft\) {0} - [{1}]({1})\n'.format(u_name, aux_uFile))
-            prob_list = self.describeDraftProb(u[1:], readme)
+            prob_list = self.describeDraftProb(u[1:], readme,frame_derecho)
+            frame_derecho.close()
             all_uni['('+u[0][-9:-4]+')(draft)'+u_name] = (str(uFile), prob_list)
         return all_uni
 
     
-    def describeDraftProb(self, probs, readme):
+    def describeDraftProb(self, probs, readme,frame_derecho):
   
         prob_list = []
         for pro in probs:
             pro_name = pro[1]+'.xml'
+            pro_name_html = pro[1]+'.html'
             pFile = self.draft_path / pro[0] / pro_name
-            aux_pFile = '%s/%s/%s'%(self.aux_draft_path,pro[0],pro_name)
+            aux_pFile = '%s/%s/%s'%(self.aux_draft_path,pro[0],pro_name_html)
+            
+            pFile_html = self.draft_path / pro[0] / pro_name_html
+            
             p_txt = pFile.open().readlines()
+
+            p_txt_html = pFile_html.open().readlines()
+    
             pFile = pFile.relative_to(*pFile.parts[:1])
             fline = p_txt[0]
             p_name = fline.split('"')[1]
@@ -452,6 +497,9 @@ class Doc:
                 readme.write('\t\t\t* [{0}]\(Draft\) {1} - [{2}]({2})\n'.format(pro[0], p_name, aux_pFile))
             else:
                 readme.write('\t\t\t* [{0}]\(Draft\) - [{1}]({1})\n'.format(pro[0], aux_pFile))
+                for text in p_txt_html:
+                        for line in text.split('\n'):
+                            frame_derecho.write('%s\n'%line.replace('/static/','../../../../static/'))
             prob_list.append((str(pFile), '(draft)'+pro[0]))
         return prob_list
 
