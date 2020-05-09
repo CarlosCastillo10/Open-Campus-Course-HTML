@@ -36,15 +36,7 @@ class Doc:
         
         estilos = open(str(self.path)+'/course-html/css/estilos.css', 'w')
         
-        estilos.write('.navegacion ul{\nlist-style: none;\n}\n\n'
-            '.menu li a{\ncolor: #353535;\nfont-family: arial;\ntext-decoration: none;\n}\n\n'
-            '.menu li a:hover{\ncolor: #CE7D35;\ntransition: all .3s\n}\n\n'
-            '.menu li{\nwidth: auto;\nfont-weight: 600;\n}\n\n'
-            '.menu li:target ul{\nmax-height: 100%;\ntransition: all .4s;\n}\n\n'
-            '.submenu{\noverflow: hidden;\nmax-height: 0;\ntransition: all .4s;\n}\n\n'
-            '.submenu>li{\nfont-weight: 300;\n}\n\n'
-            '.submenu>li>a:hover{\ncolor: #CE7D35;\nmargin-left: 20px;\n}\n\n'
-            '.submenu li a{\ndisplay: block;\npadding: 15px;\ncolor" #fff;\ntext-decoration: none;\n}')
+        estilos.write('#principal a:hover{\ncolor:#CE7D35;\n}\n\n#principal ul{\npadding-left: 20px;\n}')
 
         
 
@@ -186,13 +178,16 @@ class Doc:
         readme.write("###Course structure - [course/{0}](course/{0})\n".format(self.course_file.name))
         
        
-        frame_superior.write('<html>\n<head><title>Frame-Superior</title></head><body bgcolor="white">'
-            '<h1>%s\n</h1></body>\n</html>'%nameCourse)
+        frame_superior.write('<html>\n<style>\nbody{\nborder-bottom: 3px solid #CE7D35;\n}\n</style><head>\n'
+            '<title>Frame-Superiorn\n</title>\n</head>\n<body bgcolor="white">\n<h1>%s\n</h1></body>\n</html>'%nameCourse)
 
         self.crear_CSS()
-        frame_izquierdo.write('<html>\n<style>\nbody{\nborder-right: 3px solid #CE7D35;\n}\n</style>'
-            '<head><title>Frame-Izquierdo</title>\n<link rel="stylesheet" href="../css/estilos.css">'
-            '\n</head>\n<body>\n<nav class="navegacion">\n<ul class="menu">\n<h1>Navegación</h1>\n')
+        frame_izquierdo.write('<html>\n<style>\nbody{\nborder-right: 3px solid #CE7D35;\n}\n</style>\n'
+            '<head>\n<title>Frame-Izquierdo</title>\n<link rel="stylesheet" href="../css/estilos.css">\n'
+            '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" '
+            'integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">\n'
+            '</head>\n<body>\n<nav class="navbar navbar-expand-lg navbar-light bg-light">\n<h2>Navegación</h2>\n'
+            '<ul class="navbar-nav flex-column">\n')
 
         
         self.describeChapter(readme, frame_izquierdo)
@@ -204,7 +199,11 @@ class Doc:
             '<frame src="content/%s" name="derecho"></frame>\n</frameset>\n</frameset>\n</html'%(nameCourse,
                 "18%","10%","10%","20%","10%","30%",self.first_page))
 
-        frame_izquierdo.write('</ul>\n</nav>\n</body>\n</html>')
+        frame_izquierdo.write('</ul>\n</nav>\n'
+            '<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>\n'
+            '<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>\n'
+            '<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>\n'
+            '</body>\n</html>')
         readme.close()
         file_index.close()
         frame_izquierdo.close()
@@ -231,7 +230,9 @@ class Doc:
 
                 # Formar menu principal
                 num_id+=1
-                frame_izquierdo.write('<li id="opcion%d"><a href="#opcion%d">%s</a>'%(num_id,num_id,chap_name))
+                frame_izquierdo.write('<li class="nav-item" id="principal"><a class="nav-link dropdown-toggle" '
+                    'href="#" role="button" data-toggle="collapse" data-target="#submenu%d" aria-haspopup="true" '
+                    'aria-expanded="false">%s</a>'%(num_id,chap_name))
                 
                 # Nombre del directorio
                 namePath_html = '%s'%(self.eliminar_carateres_especiales(chap_name.replace(' ','-').lower()))
@@ -250,7 +251,7 @@ class Doc:
                 seq_list = [l.split('"')[1] for l in chap_txt if "sequential" in l]
 
 
-                pub_seq_struct, all_seq_struct = self.describeSequen(seq_list, readme, frame_izquierdo, namePath)
+                pub_seq_struct, all_seq_struct = self.describeSequen(seq_list, readme, frame_izquierdo, namePath,num_id)
                 frame_izquierdo.write('</li>\n')
 
                 ### estructura publica
@@ -262,11 +263,11 @@ class Doc:
         self.public_problems_struct = dict((k, v) for k, v in self.public_problems_struct.items() if v)
 
 
-    def describeSequen(self, seq, readme, frame_izquierdo, path):
+    def describeSequen(self, seq, readme, frame_izquierdo, path, num_id):
 
         pub_seq = OrderedDict()
         all_seq = OrderedDict()
-        frame_izquierdo.write('\n<ul class="submenu">\n') 
+        frame_izquierdo.write('\n<ul class="collapse navbar-nav flex-column" id="submenu%d">\n'%num_id) 
         for s in seq:
             self.num_units = 0;
             count_paths_html = 0;
@@ -357,12 +358,13 @@ class Doc:
                 else:
                     os.mkdir('%s/course-html/content/%s/%s/%s'%(str(self.path), path, self.eliminar_carateres_especiales(sequ_name).replace(' ','-').lower()
                         , aux_u_name.lower()))
-                frame_izquierdo.write('<li><a href="%s/%s/%s/%s.html" target="derecho">%s</a></li>\n'%(path,aux_sequ_name.lower(),aux_u_name.lower(),aux_u_name.lower(),u_name))
+                frame_izquierdo.write('<li class="nav-item"><a class="nav-link" href="%s/%s/%s/%s.html" target="derecho">%s</a></li>\n'%(path,
+                    aux_sequ_name.lower(),aux_u_name.lower(),aux_u_name.lower(),u_name))
                 #frame_derecho = open(str(self.path)+'/course-html/content/%s/%s/%s/%s.html'%(path,aux_sequ_name.lower(),aux_u_name.lower(),aux_u_name.lower()), 'w')
                 direccion = str(self.path)+'/course-html/content/%s/%s/%s'%(path,aux_sequ_name.lower(),aux_u_name.lower())
                 self.type_content = 1
             else:
-                frame_izquierdo.write('<li><a href="%s/%s/%s.html" target="derecho">%s</a></li>\n'%(path,aux_sequ_name.lower(),aux_u_name.lower(),sequ_name))
+                frame_izquierdo.write('<li class="nav-item"><a class="nav-link" href="%s/%s/%s.html" target="derecho">%s</a></li>\n'%(path,aux_sequ_name.lower(),aux_u_name.lower(),sequ_name))
                 if(self.num_pages == 0):
                     self.first_page = '%s%s/%s/%s.html'%(self.first_page,path,aux_sequ_name.lower(),aux_u_name.lower())
                     self.num_pages+=1

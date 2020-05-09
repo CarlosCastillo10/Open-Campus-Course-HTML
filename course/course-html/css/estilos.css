@@ -1,46 +1,7 @@
-.navegacion ul{
-list-style: none;
+#principal a:hover{
+color:#CE7D35;
 }
 
-.menu li a{
-color: #353535;
-font-family: arial;
-text-decoration: none;
-}
-
-.menu li a:hover{
-color: #CE7D35;
-transition: all .3s
-}
-
-.menu li{
-width: auto;
-font-weight: 600;
-}
-
-.menu li:target ul{
-max-height: 100%;
-transition: all .4s;
-}
-
-.submenu{
-overflow: hidden;
-max-height: 0;
-transition: all .4s;
-}
-
-.submenu>li{
-font-weight: 300;
-}
-
-.submenu>li>a:hover{
-color: #CE7D35;
-margin-left: 20px;
-}
-
-.submenu li a{
-display: block;
-padding: 15px;
-color" #fff;
-text-decoration: none;
+#principal ul{
+padding-left: 20px;
 }
