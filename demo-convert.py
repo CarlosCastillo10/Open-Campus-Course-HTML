@@ -291,8 +291,8 @@ class Doc:
             if len(seq_txt) > 2:
                 unit_list = [l.split('"')[1] for l in seq_txt if "vertical" in l]
                 if (len(unit_list) > 1):
-                    frame_izquierdo.write('<li><a href="#">%s</a></li>\n'%(self.tmp_name_equal))
-                    frame_izquierdo.write('<ul class="submenu2">\n') 
+                    frame_izquierdo.write('<li class="nav-item"><a class="nav-link" href="#">%s</a></li>\n'%(self.tmp_name_equal))
+                    frame_izquierdo.write('<ul class="menu-submenu">\n') 
                     pub_dict, all_dict = self.describeUnit(unit_list, readme, frame_izquierdo, sequ_name, path)
                     frame_izquierdo.write('</ul>\n')
                 else:
@@ -515,7 +515,7 @@ class Doc:
             os.mkdir('%s/course-html/content/%s/%s/%s'%(str(self.path), path, self.eliminar_carateres_especiales(sequ_name).replace(' ','-').lower()
                 , aux_u_name.lower()))
             
-            frame_izquierdo.write('<li><a href="%s/%s/%s/%s.html" target="derecho">%s</a></li>\n'%(path,aux_sequ_name.lower(),
+            frame_izquierdo.write('<li class="nav-item"><a class="nav-link" href="%s/%s/%s/%s.html" target="derecho">%s</a></li>\n'%(path,aux_sequ_name.lower(),
                 aux_u_name.lower(),aux_u_name.lower(),u_name))
 
             frame_derecho = open(str(self.path)+'/course-html/content/%s/%s/%s/%s.html'%(path,aux_sequ_name.lower(),aux_u_name.lower(),aux_u_name.lower()), 'w')
