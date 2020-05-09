@@ -37,13 +37,14 @@ class Doc:
         estilos = open(str(self.path)+'/course-html/css/estilos.css', 'w')
         
         estilos.write('.navegacion ul{\nlist-style: none;\n}\n\n'
-          '.menu li a{\ncolor: #353535;\nfont-family: arial;\ntext-decoration: none;\n}\n\n'
-          '.menu li a:hover{\ncolor: #CE7D35;\ntransition: all .3s\n}\n\n'
-          '.menu>li{\nwidth: auto;\nheight: 20px;\noverflow: hidden;\nfont-weight: 600;\n}\n\n'
-          '.menu>li:hover{\ncolor: #CE7D35;\nheight: auto;\ntransition: all .3s;\n}\n\n'
-          '.submenu>li{\nfont-weight: 300;}\n\n'
-          '.submenu>li>a:hover{\ncolor: #CE7D35;\nmargin-left: 20px;\n}\n\n'
-          '.submenu li a{\ndisplay: block;\npadding: 15px;\ncolor" #fff;\ntext-decoration: none;\n}')
+            '.menu li a{\ncolor: #353535;\nfont-family: arial;\ntext-decoration: none;\n}\n\n'
+            '.menu li a:hover{\ncolor: #CE7D35;\ntransition: all .3s\n}\n\n'
+            '.menu li{\nwidth: auto;\nfont-weight: 600;\n}\n\n'
+            '.menu li:target ul{\nmax-height: 100%;\ntransition: all .4s;\n}\n\n'
+            '.submenu{\noverflow: hidden;\nmax-height: 0;\ntransition: all .4s;\n}\n\n'
+            '.submenu>li{\nfont-weight: 300;\n}\n\n'
+            '.submenu>li>a:hover{\ncolor: #CE7D35;\nmargin-left: 20px;\n}\n\n'
+            '.submenu li a{\ndisplay: block;\npadding: 15px;\ncolor" #fff;\ntext-decoration: none;\n}')
 
         
 
@@ -189,15 +190,16 @@ class Doc:
             '<h1>%s\n</h1></body>\n</html>'%nameCourse)
 
         self.crear_CSS()
-        frame_izquierdo.write('<html>\n<head><title>Frame-Derecho</title>\n<link rel="stylesheet" href="../css/estilos.css">'
-            '</head><body>\n<nav class="navegacion">\n<ul class="menu">\n<h1>Navegación</h1>\n')
+        frame_izquierdo.write('<html>\n<style>\nbody{\nborder-right: 3px solid #CE7D35;\n}\n</style>'
+            '<head><title>Frame-Izquierdo</title>\n<link rel="stylesheet" href="../css/estilos.css">'
+            '\n</head>\n<body>\n<nav class="navegacion">\n<ul class="menu">\n<h1>Navegación</h1>\n')
 
         
         self.describeChapter(readme, frame_izquierdo)
         index.write('<html>\n<head>\n<title>%s</title>\n</head>\n<frameset rows="%s,*" '
-            'frameborder="yes" bordercolor="#333" marginwidth="%s" '
+            'frameborder="no" bordercolor="#333" marginwidth="%s" '
             'marginheight="%s"scrolling="no">\n<frame src="content/frame-superior.html" name="superior"></frame>\n'
-            '<frameset cols="%s,*" frameborder="yes" bordercolor="#333" marginwidth="%s" marginheight="%s" '
+            '<frameset cols="%s,*" frameborder="no" bordercolor="#333" marginwidth="%s" marginheight="%s" '
             'scrolling="yes">\n<frame src="content/frame-izquierdo.html" name="izquierdo"</frame>\n'
             '<frame src="content/%s" name="derecho"></frame>\n</frameset>\n</frameset>\n</html'%(nameCourse,
                 "18%","10%","10%","20%","10%","30%",self.first_page))
@@ -212,6 +214,7 @@ class Doc:
     def describeChapter(self, readme, frame_izquierdo):
    
         self.crear_CSS()
+        num_id = 0
         for c in self.chapter_list:
             # build path
             c += '.xml'
@@ -227,7 +230,8 @@ class Doc:
                 readme.write('* [Section] {0} - [{1}]({1})\n'.format(chap_name, aux_cFile))
 
                 # Formar menu principal
-                frame_izquierdo.write('<li><a href="#">%s</a>'%chap_name)
+                num_id+=1
+                frame_izquierdo.write('<li id="opcion%d"><a href="#opcion%d">%s</a>'%(num_id,num_id,chap_name))
                 
                 # Nombre del directorio
                 namePath_html = '%s'%(self.eliminar_carateres_especiales(chap_name.replace(' ','-').lower()))
@@ -329,6 +333,7 @@ class Doc:
         #print('\n\n')
         pub_uni = OrderedDict()
         all_uni = OrderedDict()
+        direccion = ''
 
         for u in uni:
             u += '.xml'
@@ -353,7 +358,8 @@ class Doc:
                     os.mkdir('%s/course-html/content/%s/%s/%s'%(str(self.path), path, self.eliminar_carateres_especiales(sequ_name).replace(' ','-').lower()
                         , aux_u_name.lower()))
                 frame_izquierdo.write('<li><a href="%s/%s/%s/%s.html" target="derecho">%s</a></li>\n'%(path,aux_sequ_name.lower(),aux_u_name.lower(),aux_u_name.lower(),u_name))
-                frame_derecho = open(str(self.path)+'/course-html/content/%s/%s/%s/%s.html'%(path,aux_sequ_name.lower(),aux_u_name.lower(),aux_u_name.lower()), 'w')
+                #frame_derecho = open(str(self.path)+'/course-html/content/%s/%s/%s/%s.html'%(path,aux_sequ_name.lower(),aux_u_name.lower(),aux_u_name.lower()), 'w')
+                direccion = str(self.path)+'/course-html/content/%s/%s/%s'%(path,aux_sequ_name.lower(),aux_u_name.lower())
                 self.type_content = 1
             else:
                 frame_izquierdo.write('<li><a href="%s/%s/%s.html" target="derecho">%s</a></li>\n'%(path,aux_sequ_name.lower(),aux_u_name.lower(),sequ_name))
@@ -361,7 +367,8 @@ class Doc:
                     self.first_page = '%s%s/%s/%s.html'%(self.first_page,path,aux_sequ_name.lower(),aux_u_name.lower())
                     self.num_pages+=1
                  # Crear los archivos.html en el directorio creado para cada section
-                frame_derecho = open(str(self.path)+'/course-html/content/%s/%s/%s.html'%(path,aux_sequ_name.lower(),aux_u_name.lower()), 'w')
+                #frame_derecho = open(str(self.path)+'/course-html/content/%s/%s/%s.html'%(path,aux_sequ_name.lower(),aux_u_name.lower()), 'w')
+                direccion = str(self.path)+'/course-html/content/%s/%s'%(path,aux_sequ_name.lower())
                 self.type_content = 0
            
             
@@ -382,14 +389,13 @@ class Doc:
 
             #print(prob_list)
 
-            pub_dict, all_dict = self.describeProb(prob_list, readme, frame_derecho)
-            frame_derecho.close()
+            pub_dict, all_dict = self.describeProb(prob_list, readme, direccion, aux_u_name.lower())
             pub_uni[u_name] = pub_dict
             all_uni['('+u[-9:-4]+')'+u_name] = (str(uFile), all_dict)
         pub_uni = dict((k, v) for k, v in pub_uni.items() if v)
         return pub_uni, all_uni
 
-    def describeProb(self, prob_list, readme, frame_derecho):
+    def describeProb(self, prob_list, readme, direccion, name):
         
         '''
         print(prob_list)
@@ -406,8 +412,15 @@ class Doc:
 
         pat1 = re.compile(r'<problem ([^>]+)>')
         pat2 = re.compile(r'(\S+)="([^"]+)"')
+        num_files = 0
+        aux_u_name = name
 
         for pro in prob_list:
+            if num_files > 0:
+                aux_u_name = '%s-%d'%(name,num_files)
+            #print('%s/%s.html'%(direccion,name))
+            frame_derecho = open('%s/%s.html'%(direccion,aux_u_name),'w')
+            num_files +=1
             # Pendiente agregar condicion para ver si es un video o un html.
             if pro[0] == 'html': # Condicion para ver si el archivo es un html
                 pro_name = pro[1]+'.xml'
@@ -449,6 +462,7 @@ class Doc:
                                 frame_derecho.write('%s\n'%line.replace('/static/','../../../../static/'))
                             else:
                                 frame_derecho.write('%s\n'%line.replace('/static/','../../../../../static/'))
+                    frame_derecho.close()
                 
                 pro_list.append((str(pFile), pro[0]))
             elif pro[0] == 'video':
@@ -456,6 +470,7 @@ class Doc:
                 pFile = self.path / pro[0] / pro_name
                 frame_derecho.write('<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
                     'frameborder=»0″></iframe>\n'%self.obtener_video(pFile))
+                frame_derecho.close()
                 #print(self.obtener_titulo_video())
 
                 
