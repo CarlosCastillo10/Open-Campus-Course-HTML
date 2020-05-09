@@ -178,7 +178,7 @@ class Doc:
         os.mkdir('%s/course-html/css'%self.path)
         
         readme = open(str(self.path)+'/README.md', 'w')
-        index = open(str(self.path)+'/course-html/index.html', 'w') 
+        file_index = open(str(self.path)+'/course-html/index.html', 'w') 
         frame_superior = open(str(self.path)+'/course-html/content/frame-superior.html', 'w') 
         frame_izquierdo = open(str(self.path)+'/course-html/content/frame-izquierdo.html', 'w') 
         
@@ -196,7 +196,7 @@ class Doc:
 
         
         self.describeChapter(readme, frame_izquierdo)
-        index.write('<html>\n<head>\n<title>%s</title>\n</head>\n<frameset rows="%s,*" '
+        file_index.write('<html>\n<head>\n<title>%s</title>\n</head>\n<frameset rows="%s,*" '
             'frameborder="no" bordercolor="#333" marginwidth="%s" '
             'marginheight="%s"scrolling="no">\n<frame src="content/frame-superior.html" name="superior"></frame>\n'
             '<frameset cols="%s,*" frameborder="no" bordercolor="#333" marginwidth="%s" marginheight="%s" '
@@ -206,7 +206,7 @@ class Doc:
 
         frame_izquierdo.write('</ul>\n</nav>\n</body>\n</html>')
         readme.close()
-        index.close()
+        file_index.close()
         frame_izquierdo.close()
 
 
@@ -396,7 +396,7 @@ class Doc:
         return pub_uni, all_uni
 
     def describeProb(self, prob_list, readme, direccion, name):
-        
+       
         '''
         print(prob_list)
         print(len(prob_list))
@@ -414,15 +414,21 @@ class Doc:
         pat2 = re.compile(r'(\S+)="([^"]+)"')
         num_files = 0
         aux_u_name = name
+        files_list = []
+        txt_prob = ''
+        #file_idx_prob = open('%s/idx-%s.html'%(direccion,aux_u_name),'w')
+        #file_idx_prob.write('<html>\n<body>\n')
 
         for pro in prob_list:
             if num_files > 0:
                 aux_u_name = '%s-%d'%(name,num_files)
             #print('%s/%s.html'%(direccion,name))
             frame_derecho = open('%s/%s.html'%(direccion,aux_u_name),'w')
+            files_list.append('%s/%s.html'%(direccion,aux_u_name))
             num_files +=1
             # Pendiente agregar condicion para ver si es un video o un html.
             if pro[0] == 'html': # Condicion para ver si el archivo es un html
+                txt_prob = '%s<button><a href="%s.html">Page</a></button>\n'%(txt_prob, aux_u_name)
                 pro_name = pro[1]+'.xml'
                 pro_name_html = pro[1]+'.html' # obtener el arhivo html
                 
@@ -470,10 +476,20 @@ class Doc:
                 pFile = self.path / pro[0] / pro_name
                 frame_derecho.write('<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
                     'frameborder=»0″></iframe>\n'%self.obtener_video(pFile))
+                txt_prob = '%s<button><a href="%s.html">Video</a></button>\n'%(txt_prob, aux_u_name)
                 frame_derecho.close()
                 #print(self.obtener_titulo_video())
+        
+        for name_file in files_list:
+            file = open(name_file,'r')
+            file_lines = file.readlines()
+            txt_file = ''
+            for line in file_lines:
+                txt_file += line
+            file = open(name_file,'w')
+            file.write('%s<br><br>%s'%(txt_prob, txt_file))
+            file.close()
 
-                
         return pub_prob, pro_list
 
     # Obtener informacion de unidades
