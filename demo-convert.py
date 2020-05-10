@@ -474,11 +474,12 @@ class Doc:
                 
                 pro_list.append((str(pFile), pro[0]))
             elif pro[0] == 'video':
+                print("=============REALIZANDO TRANSFORMACIÓN=============")
                 pro_name = pro[1]+'.xml'
                 pFile = self.path / pro[0] / pro_name
                 video_title = self.obtener_video(pFile)
-                frame_derecho.write('<h1>%s</h1>\n<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
-                    'frameborder=»0″></iframe>\n'%(self.obtener_titulo_video(),video_title))
+                frame_derecho.write('<h3>VIDEO: %s</h3>\n<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
+                    'frameborder=»0″></iframe>\n'%(self.obtener_titulo_video().upper(),video_title))
                 txt_prob = '%s<button><a href="%s.html">Video</a></button>\n'%(txt_prob, aux_u_name)
                 frame_derecho.close()
         
