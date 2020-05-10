@@ -37,7 +37,8 @@ class Doc:
         
         estilos = open(str(self.path)+'/course-html/css/estilos.css', 'w')
         
-        estilos.write('#principal a:hover{\ncolor:#CE7D35;\n}\n\n#principal ul{\npadding-left: 20px;\n}')
+        estilos.write('#principal a:hover{\ncolor:#CE7D35;\n}\n\n#principal ul{\npadding-left: 20px;\n}\n\n'
+            '#principal2 a:hover{\ncolor:#CE7D35;\n}\n\n#principal2 ul{\npadding-left: 20px;\n}')
 
         
 
@@ -225,7 +226,7 @@ class Doc:
         readme.close()
         file_index.close()
         frame_izquierdo.close()
-        #rint("Transformación finalizada")
+        print("Transformación finalizada")
 
 
     # Obtener submenu
@@ -288,6 +289,7 @@ class Doc:
         all_seq = OrderedDict()
         frame_izquierdo.write('\n<ul class="collapse navbar-nav flex-column" id="submenu%d">\n'%num_id) 
         for s in seq:
+            num_id_seq = 0
             self.num_units = 0;
             count_paths_html = 0;
             unpublished = False
@@ -309,10 +311,15 @@ class Doc:
             #print('%d\n%s\n\n'%(len(seq_txt),seq_txt))
             if len(seq_txt) > 2:
                 unit_list = [l.split('"')[1] for l in seq_txt if "vertical" in l]
-
+                
                 if (len(unit_list) > 1):
-                    frame_izquierdo.write('<li class="nav-item"><a class="nav-link dropdown-toggle" href="#">%s</a></li>\n'%(self.tmp_name_equal))
-                    frame_izquierdo.write('<ul class="menu-submenu">\n') 
+                    num_id_seq +=1
+                    frame_izquierdo.write('<li class="nav-item" id="principal2"><a class="nav-link dropdown-toggle" '
+                        'href="#" role="button" data-toggle="collapse" data-target="#menu-submenu%d" aria-haspopup="true" '
+                        'aria-expanded="false">%s</a></li>\n'%(num_id_seq, self.tmp_name_equal))
+                    
+                    #frame_izquierdo.write('<ul class="menu-submenu">\n') 
+                    frame_izquierdo.write('\n<ul class="collapse navbar-nav flex-column" id="menu-submenu%d">\n'%num_id_seq) 
                     pub_dict, all_dict = self.describeUnit(unit_list, readme, frame_izquierdo, sequ_name, path)
                     frame_izquierdo.write('</ul>\n')
                 else:
@@ -355,7 +362,7 @@ class Doc:
         pub_uni = OrderedDict()
         all_uni = OrderedDict()
         direccion = ''
-
+            
         for u in uni:
             u += '.xml'
             uFile = self.vert_path / u
@@ -499,10 +506,10 @@ class Doc:
                 pro_name = pro[1]+'.xml'
                 pFile = self.path / pro[0] / pro_name
                 video_title = self.obtener_video(pFile)
-                frame_derecho.write('<h3>VIDEO: %s</h3>\n<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
-                    'frameborder=»0″></iframe>\n'%(self.obtener_titulo_video().upper(),video_title))
-                #frame_derecho.write('<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
-                    #'frameborder=»0″></iframe>\n'%video_title)
+                #frame_derecho.write('<h3>VIDEO: %s</h3>\n<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
+                    #'frameborder=»0″></iframe>\n'%(self.obtener_titulo_video().upper(),video_title))
+                frame_derecho.write('<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
+                    'frameborder=»0″></iframe>\n'%video_title)
                 txt_prob = '%s<button><a href="%s.html">Video</a></button>\n'%(txt_prob, aux_u_name)
                 frame_derecho.close()
             elif pro[0] == 'problem':
