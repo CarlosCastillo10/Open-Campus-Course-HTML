@@ -51,6 +51,7 @@ class Doc:
         palabra = palabra.replace('(','')
         palabra = palabra.replace(')','')
         palabra = palabra.replace('/','')
+        palabra = palabra.replace('&quot;','')
         return palabra
 
     def limpiar_archivos(self):
@@ -71,7 +72,9 @@ class Doc:
             url = (root.attrib['youtube_id_1_0'])
             self.url_video = 'https://www.youtube.com/watch?v=%s'%url
             return("https://www.youtube.com/embed/%s" % url)
-        return 0
+        else:
+            self.url_video = ''
+        return ''
     
     def obtener_course_title(self):
         tree = ET.parse(str(self.course_file))
@@ -80,8 +83,15 @@ class Doc:
             self.course_title = (root.attrib['display_name']).upper()
 
     def obtener_titulo_video(self):
-        video = pafy.new(self.url_video)
-        return video.title
+        video_title = ''
+        try:
+            if self.url_video:
+                video = pafy.new(self.url_video)
+                video_title = video.title
+        except:
+            video_title ='video no disponible'
+        return video_title
+
 
     
     # Obtener menu principal
@@ -204,7 +214,7 @@ class Doc:
             'marginheight="%s"scrolling="no">\n<frame src="content/frame-superior.html" name="superior"></frame>\n'
             '<frameset cols="%s,*" frameborder="no" bordercolor="#333" marginwidth="%s" marginheight="%s" '
             'scrolling="yes">\n<frame src="content/frame-izquierdo.html" name="izquierdo"</frame>\n'
-            '<frame src="content/%s"  marginwidth="100px" frameborder="yes" name="derecho"></frame>\n</frameset>\n</frameset>\n</html'%(nameCourse,
+            '<frame src="content/%s"  marginwidth="100px" frameborder="yes" name="derecho"></frame>\n</frameset>\n</frameset>\n</html>'%(nameCourse,
                 "18%","10%","10%","24%","10%","30%",self.first_page))
 
         frame_izquierdo.write('</ul>\n</nav>\n'
@@ -215,6 +225,7 @@ class Doc:
         readme.close()
         file_index.close()
         frame_izquierdo.close()
+        print("Transformación finalizada")
 
 
     # Obtener submenu
@@ -482,7 +493,7 @@ class Doc:
                 
                 pro_list.append((str(pFile), pro[0]))
             elif pro[0] == 'video':
-                print("=============REALIZANDO TRANSFORMACIÓN=============")
+                print('Ok')
                 pro_name = pro[1]+'.xml'
                 pFile = self.path / pro[0] / pro_name
                 video_title = self.obtener_video(pFile)
