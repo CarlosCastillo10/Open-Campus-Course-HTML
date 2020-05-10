@@ -25,6 +25,7 @@ class Doc:
         """
         course_file_list = list(self.course_path.iterdir())
         self.course_file = [x for x in course_file_list if x.suffix == '.xml'][0]
+        self.obtener_course_title()
         course_txt = self.course_file.open().readlines()
         for cline in course_txt:
             if 'chapter' in cline:
@@ -71,6 +72,12 @@ class Doc:
             self.url_video = 'https://www.youtube.com/watch?v=%s'%url
             return("https://www.youtube.com/embed/%s" % url)
         return 0
+    
+    def obtener_course_title(self):
+        tree = ET.parse(str(self.course_file))
+        root = tree.getroot()
+        if 'display_name' in root.attrib:
+            self.course_title = (root.attrib['display_name']).upper()
 
     def obtener_titulo_video(self):
         video = pafy.new(self.url_video)
@@ -121,6 +128,7 @@ class Doc:
         self.tmp_name_equal = ''
         self.url_video = ''
         self.type_content = 0
+        self.course_title = ''
 
         # Variables de Path
         self.path = Path(start_path)
@@ -179,7 +187,7 @@ class Doc:
         
        
         frame_superior.write('<html>\n<style>\nbody{\nborder-bottom: 3px solid #CE7D35;\n}\n</style><head>\n'
-            '<title>Frame-Superiorn\n</title>\n</head>\n<body bgcolor="white">\n<h1>%s\n</h1></body>\n</html>'%nameCourse)
+            '<title>Frame-Superiorn\n</title>\n</head>\n<body bgcolor="white">\n<h1 style="text-align: center;">%s\n</h1></body>\n</html>'%self.course_title)
 
         self.crear_CSS()
         frame_izquierdo.write('<html>\n<style>\nbody{\nborder-right: 3px solid #CE7D35;\n}\n</style>\n'
@@ -480,6 +488,8 @@ class Doc:
                 video_title = self.obtener_video(pFile)
                 frame_derecho.write('<h3>VIDEO: %s</h3>\n<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
                     'frameborder=»0″></iframe>\n'%(self.obtener_titulo_video().upper(),video_title))
+                #frame_derecho.write('<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
+                    #'frameborder=»0″></iframe>\n'%video_title)
                 txt_prob = '%s<button><a href="%s.html">Video</a></button>\n'%(txt_prob, aux_u_name)
                 frame_derecho.close()
         
