@@ -196,8 +196,8 @@ class Doc:
             'marginheight="%s"scrolling="no">\n<frame src="content/frame-superior.html" name="superior"></frame>\n'
             '<frameset cols="%s,*" frameborder="no" bordercolor="#333" marginwidth="%s" marginheight="%s" '
             'scrolling="yes">\n<frame src="content/frame-izquierdo.html" name="izquierdo"</frame>\n'
-            '<frame src="content/%s" name="derecho"></frame>\n</frameset>\n</frameset>\n</html'%(nameCourse,
-                "18%","10%","10%","20%","10%","30%",self.first_page))
+            '<frame src="content/%s"  marginwidth="100px" frameborder="yes" name="derecho"></frame>\n</frameset>\n</frameset>\n</html'%(nameCourse,
+                "18%","10%","10%","24%","10%","30%",self.first_page))
 
         frame_izquierdo.write('</ul>\n</nav>\n'
             '<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>\n'
@@ -291,7 +291,7 @@ class Doc:
             if len(seq_txt) > 2:
                 unit_list = [l.split('"')[1] for l in seq_txt if "vertical" in l]
                 if (len(unit_list) > 1):
-                    frame_izquierdo.write('<li class="nav-item"><a class="nav-link" href="#">%s</a></li>\n'%(self.tmp_name_equal))
+                    frame_izquierdo.write('<li class="nav-item"><a class="nav-link dropdown-toggle" href="#">%s</a></li>\n'%(self.tmp_name_equal))
                     frame_izquierdo.write('<ul class="menu-submenu">\n') 
                     pub_dict, all_dict = self.describeUnit(unit_list, readme, frame_izquierdo, sequ_name, path)
                     frame_izquierdo.write('</ul>\n')
