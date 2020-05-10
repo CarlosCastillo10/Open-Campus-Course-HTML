@@ -309,6 +309,7 @@ class Doc:
             #print('%d\n%s\n\n'%(len(seq_txt),seq_txt))
             if len(seq_txt) > 2:
                 unit_list = [l.split('"')[1] for l in seq_txt if "vertical" in l]
+
                 if (len(unit_list) > 1):
                     frame_izquierdo.write('<li class="nav-item"><a class="nav-link dropdown-toggle" href="#">%s</a></li>\n'%(self.tmp_name_equal))
                     frame_izquierdo.write('<ul class="menu-submenu">\n') 
@@ -503,6 +504,33 @@ class Doc:
                     #'frameborder=»0″></iframe>\n'%video_title)
                 txt_prob = '%s<button><a href="%s.html">Video</a></button>\n'%(txt_prob, aux_u_name)
                 frame_derecho.close()
+            elif pro[0] == 'problem':
+                pro_name = pro[1]+'.xml'
+                pFile = self.path / pro[0] / pro_name
+                txt_problem = pFile.open().readlines()
+                txt_problem = txt_problem[1:]
+                txt_problem = txt_problem[:-1]
+                type_question = ''
+                num_groups = 0
+                name = ''
+                for line in txt_problem:
+                    if '<choicegroup' in line:
+                        type_question = 'radio'
+                        num_groups+=1
+                        name = 'name%d'%(num_groups)
+                    elif '<checkboxgroup' in line:
+                        type_question = 'checkbox'
+                    elif ('multiplechoiceresponse' not in line) and ('choicegroup' not in line) and ('checkboxgroup' not in line) and ('choiceresponse' not in line):
+                        if type_question == 'radio':
+                            line = line.replace('    <choice','<input type="%s" name="%s"'%(type_question,name))
+                        else:
+                            line = line.replace('    <choice','<label><input type="%s"'%(type_question))
+                        line = line.replace('correct','value')
+                        line = line.replace('</choice>','</label><br>')
+                        line = line.replace('</html>','</html><br>')
+                        frame_derecho.write(line.replace('/static/','../../../../static/'))
+                txt_prob = '%s<button><a href="%s.html">Problema</a></button>\n'%(txt_prob, aux_u_name)
+                frame_derecho.close()
         
         for name_file in files_list:
             file = open(name_file,'r')
@@ -569,6 +597,7 @@ class Doc:
             p_name = fline.split('"')[1]
             if pro[0] == 'problem':
                 readme.write('\t\t\t* [{0}]\(Draft\) {1} - [{2}]({2})\n'.format(pro[0], p_name, aux_pFile))
+                print('Entra aqui')
             else:
                 readme.write('\t\t\t* [{0}]\(Draft\) - [{1}]({1})\n'.format(pro[0], aux_pFile))
                 for text in p_txt_html:
