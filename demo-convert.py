@@ -225,7 +225,7 @@ class Doc:
         readme.close()
         file_index.close()
         frame_izquierdo.close()
-        print("Transformación finalizada")
+        #rint("Transformación finalizada")
 
 
     # Obtener submenu
@@ -392,7 +392,8 @@ class Doc:
                 #frame_derecho = open(str(self.path)+'/course-html/content/%s/%s/%s.html'%(path,aux_sequ_name.lower(),aux_u_name.lower()), 'w')
                 direccion = str(self.path)+'/course-html/content/%s/%s'%(path,aux_sequ_name.lower())
                 self.type_content = 0
-           
+            #if(aux_u_name.lower() == 'encuesta de satisfacción'):
+                #print("Es una encuesta")
             
             prob_list = []
             for l in uni_txt[1:]:
@@ -531,6 +532,12 @@ class Doc:
                         frame_derecho.write(line.replace('/static/','../../../../static/'))
                 txt_prob = '%s<button><a href="%s.html">Problema</a></button>\n'%(txt_prob, aux_u_name)
                 frame_derecho.close()
+
+        if aux_u_name.lower() == 'encuesta-de-satisfaccion':
+            frame_derecho = open('%s/%s.html'%(direccion,aux_u_name),'w')
+            frame_derecho.write('<iframe style="width:%s; height:%s;" '
+                'src="https://docs.google.com/forms/d/e/1FAIpQLSeyvQFO-e-VDuuL0TMFTYrIwdVr73UyZ7IGGdgMMXaMYITo9g/viewform"></iframe>'%('100%', '100%'))
+            frame_derecho.close()
         
         for name_file in files_list:
             file = open(name_file,'r')
