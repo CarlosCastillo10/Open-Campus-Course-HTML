@@ -197,8 +197,9 @@ class Doc:
         readme.write("###Course structure - [course/{0}](course/{0})\n".format(self.course_file.name))
         
        
-        frame_superior.write('<html>\n<style>\nbody{\nborder-bottom: 3px solid #CE7D35;\n}\n</style><head>\n'
-            '<title>Frame-Superiorn\n</title>\n</head>\n<body bgcolor="white">\n<h1 style="text-align: center;">%s\n</h1></body>\n</html>'%self.course_title)
+        frame_superior.write('<html>\n<style>\nbody{\nborder-bottom: 3px solid #CE7D35;\n}\n'
+            'h1{\ntext-align: center;\npadding-top: 40px;\n}\n</style>\n'
+            '<title>Frame-Superior</title>\n</head>\n<body>\n<h1>%s\n</h1>\n</body>\n</html>'%self.course_title)
 
         self.crear_CSS()
         frame_izquierdo.write('<html>\n<style>\nbody{\nborder-right: 3px solid #CE7D35;\n}\n</style>\n'
@@ -211,12 +212,12 @@ class Doc:
         
         self.describeChapter(readme, frame_izquierdo)
         file_index.write('<html>\n<head>\n<title>%s</title>\n</head>\n<frameset rows="%s,*" '
-            'frameborder="no" bordercolor="#333" marginwidth="%s" '
-            'marginheight="%s"scrolling="no">\n<frame src="content/frame-superior.html" name="superior"></frame>\n'
-            '<frameset cols="%s,*" frameborder="no" bordercolor="#333" marginwidth="%s" marginheight="%s" '
-            'scrolling="yes">\n<frame src="content/frame-izquierdo.html" name="izquierdo"</frame>\n'
-            '<frame src="content/%s"  marginwidth="100px" frameborder="yes" name="derecho"></frame>\n</frameset>\n</frameset>\n</html>'%(nameCourse,
-                "18%","10%","10%","24%","10%","30%",self.first_page))
+            'frameborder="no" bordercolor="#333" marginheight="%s" scrolling="no">\n'
+            '<frame src="content/frame-superior.html" name="superior"></frame>\n'
+            '<frameset cols="%s,*" frameborder="no" bordercolor="#333" marginheight="%s" scrolling="yes">\n'
+            '<frame src="content/frame-izquierdo.html" name="izquierdo"</frame>\n'
+            '<frame src="content/%s"  marginwidth="100px" frameborder="yes" name="derecho"></frame>\n</frameset>\n</frameset>\n</html>'%(self.course_title,
+                "18%","10%","27%", "30%",self.first_page))
 
         frame_izquierdo.write('</ul>\n</nav>\n'
             '<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>\n'
@@ -458,9 +459,9 @@ class Doc:
             num_files +=1
             # Pendiente agregar condicion para ver si es un video o un html.
             if pro[0] == 'html': # Condicion para ver si el archivo es un html
-                txt_prob = '%s<a class="btn btn-outline-dark" href="%s.html" data-toggle="button" aria-pressed="false" autocomplete="off">Page</a>\n'%(txt_prob, aux_u_name)
+                txt_prob = '%s<a class="btn btn-outline-dark border-0 col-4" href="%s.html" data-toggle="button" aria-pressed="false" autocomplete="off">Page</a>\n'%(txt_prob, aux_u_name)
                 #'<a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Primary link</a>'
-                'data-toggle="button" aria-pressed="false" autocomplete="off"'
+                #'data-toggle="button" aria-pressed="false" autocomplete="off"'
                 pro_name = pro[1]+'.xml'
                 pro_name_html = pro[1]+'.html' # obtener el arhivo html
                 
@@ -508,11 +509,11 @@ class Doc:
                 pro_name = pro[1]+'.xml'
                 pFile = self.path / pro[0] / pro_name
                 video_title = self.obtener_video(pFile)
-                frame_derecho.write('<h3>VIDEO: %s</h3>\n<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
-                    'frameborder=»0″></iframe>\n'%(self.obtener_titulo_video().upper(),video_title))
+                #frame_derecho.write('<h3>VIDEO: %s</h3>\n<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
+                    #'frameborder=»0″></iframe>\n'%(self.obtener_titulo_video().upper(),video_title))
                 frame_derecho.write('<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
                     'frameborder=»0″></iframe>\n'%video_title)
-                txt_prob = '%s<a class="btn btn-outline-dark" href="%s.html" data-toggle="button" aria-pressed="false" autocomplete="off">Video</a>\n'%(txt_prob, aux_u_name)
+                txt_prob = '%s<a class="btn btn-outline-dark border-0 col-4" href="%s.html" data-toggle="button" aria-pressed="false" autocomplete="off">Video</a>\n'%(txt_prob, aux_u_name)
                 frame_derecho.close()
             elif pro[0] == 'problem':
                 pro_name = pro[1]+'.xml'
@@ -539,7 +540,7 @@ class Doc:
                         line = line.replace('</choice>','</label><br>')
                         line = line.replace('</html>','</html><br>')
                         frame_derecho.write(line.replace('/static/','../../../../static/'))
-                txt_prob = '%s<a class="btn btn-outline-dark" href="%s.html" data-toggle="button" aria-pressed="false" autocomplete="off">Problem</a>\n'%(txt_prob, aux_u_name)
+                txt_prob = '%s<a class="btn btn-outline-dark border-0 col-4" href="%s.html" data-toggle="button" aria-pressed="false" autocomplete="off">Problem</a>\n'%(txt_prob, aux_u_name)
                 frame_derecho.close()
 
         if aux_u_name.lower() == 'encuesta-de-satisfaccion':
@@ -557,8 +558,10 @@ class Doc:
             file = open(name_file,'w')
             file.write('<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" '
                 'integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">\n'
-                '<div class="btn-group btn-group-lg" role="group" aria-label="Toolbar with button groups">\n'
-                '%s</div><br><br>\n%s'
+                '<style type="text/css">\n.botones{\nborder-radius: 23px;\n}\n</style>\n'
+                '<div class ="container">\n<div class="row justify-content-center">\n'
+                '<div class="btn-group btn-group-lg col-6 p-0 my-4 border border-dark botones" role="group" aria-label="Toolbar with button groups">\n'
+                '%s</div><br><br>\n</div>\n%s'
                 '<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>\n'
                 '<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>\n'
                 '<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>'%(txt_prob, txt_file))
