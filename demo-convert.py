@@ -205,7 +205,7 @@ class Doc:
             '<head>\n<title>Frame-Izquierdo</title>\n<link rel="stylesheet" href="../css/estilos.css">\n'
             '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" '
             'integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">\n'
-            '</head>\n<body>\n<nav class="navbar navbar-expand-lg navbar-light bg-light">\n<h2>Navegación</h2>\n'
+            '</head>\n<body>\n<h3 style="text-align: center;">Contenido</h3>\n<nav class="navbar navbar-expand-lg navbar-light bg-light">\n'
             '<ul class="navbar-nav flex-column">\n')
 
         
@@ -288,8 +288,8 @@ class Doc:
         pub_seq = OrderedDict()
         all_seq = OrderedDict()
         frame_izquierdo.write('\n<ul class="collapse navbar-nav flex-column" id="submenu%d">\n'%num_id) 
+        num_id_seq = 0
         for s in seq:
-            num_id_seq = 0
             self.num_units = 0;
             count_paths_html = 0;
             unpublished = False
@@ -458,7 +458,9 @@ class Doc:
             num_files +=1
             # Pendiente agregar condicion para ver si es un video o un html.
             if pro[0] == 'html': # Condicion para ver si el archivo es un html
-                txt_prob = '%s<button><a href="%s.html">Page</a></button>\n'%(txt_prob, aux_u_name)
+                txt_prob = '%s<a class="btn btn-outline-dark" href="%s.html" data-toggle="button" aria-pressed="false" autocomplete="off">Page</a>\n'%(txt_prob, aux_u_name)
+                #'<a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Primary link</a>'
+                'data-toggle="button" aria-pressed="false" autocomplete="off"'
                 pro_name = pro[1]+'.xml'
                 pro_name_html = pro[1]+'.html' # obtener el arhivo html
                 
@@ -506,11 +508,11 @@ class Doc:
                 pro_name = pro[1]+'.xml'
                 pFile = self.path / pro[0] / pro_name
                 video_title = self.obtener_video(pFile)
-                #frame_derecho.write('<h3>VIDEO: %s</h3>\n<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
-                    #'frameborder=»0″></iframe>\n'%(self.obtener_titulo_video().upper(),video_title))
+                frame_derecho.write('<h3>VIDEO: %s</h3>\n<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
+                    'frameborder=»0″></iframe>\n'%(self.obtener_titulo_video().upper(),video_title))
                 frame_derecho.write('<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
                     'frameborder=»0″></iframe>\n'%video_title)
-                txt_prob = '%s<button><a href="%s.html">Video</a></button>\n'%(txt_prob, aux_u_name)
+                txt_prob = '%s<a class="btn btn-outline-dark" href="%s.html" data-toggle="button" aria-pressed="false" autocomplete="off">Video</a>\n'%(txt_prob, aux_u_name)
                 frame_derecho.close()
             elif pro[0] == 'problem':
                 pro_name = pro[1]+'.xml'
@@ -537,7 +539,7 @@ class Doc:
                         line = line.replace('</choice>','</label><br>')
                         line = line.replace('</html>','</html><br>')
                         frame_derecho.write(line.replace('/static/','../../../../static/'))
-                txt_prob = '%s<button><a href="%s.html">Problema</a></button>\n'%(txt_prob, aux_u_name)
+                txt_prob = '%s<a class="btn btn-outline-dark" href="%s.html" data-toggle="button" aria-pressed="false" autocomplete="off">Problem</a>\n'%(txt_prob, aux_u_name)
                 frame_derecho.close()
 
         if aux_u_name.lower() == 'encuesta-de-satisfaccion':
@@ -553,7 +555,13 @@ class Doc:
             for line in file_lines:
                 txt_file += line
             file = open(name_file,'w')
-            file.write('%s<br><br>%s'%(txt_prob, txt_file))
+            file.write('<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" '
+                'integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">\n'
+                '<div class="btn-group btn-group-lg" role="group" aria-label="Toolbar with button groups">\n'
+                '%s</div><br><br>\n%s'
+                '<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>\n'
+                '<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>\n'
+                '<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>'%(txt_prob, txt_file))
             file.close()
 
         return pub_prob, pro_list
