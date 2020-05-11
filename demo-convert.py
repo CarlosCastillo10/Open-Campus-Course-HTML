@@ -93,6 +93,31 @@ class Doc:
             video_title ='video no disponible'
         return video_title
 
+    def reescribir_archivos(self, files_list, txt_prob):
+        for name_file in files_list:
+            # Es para agregarle estilos a los videos
+            style_aditional = ''
+            file = open(name_file,'r')
+            file_lines = file.readlines()
+            txt_file = ''
+            for line in file_lines:
+                txt_file += line
+            if '<iframe class=»youtube-player»' in txt_file:
+                style_aditional = 'iframe{\nwidth: %s;\nheight: %s;\nmargin: 20px 80px;\n}\n'%('80%','60%')
+            else:
+                style_aditional = ''
+
+            file = open(name_file,'w')
+            file.write('<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" '
+                'integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">\n'
+                '<style type="text/css">\n%s.botones{\nborder-radius: 23px;\n}\n</style>\n'
+                '<div class ="container">\n<div class="row justify-content-center">\n'
+                '<div class="btn-group btn-group-lg col-6 p-0 my-4 border border-dark botones" role="group" aria-label="Toolbar with button groups">\n'
+                '%s</div><br><br>\n</div>\n%s'
+                '<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>\n'
+                '<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>\n'
+                '<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>'%(style_aditional,txt_prob, txt_file))
+            file.close()
 
     
     # Obtener menu principal
@@ -140,6 +165,7 @@ class Doc:
         self.url_video = ''
         self.type_content = 0
         self.course_title = ''
+        self.num_id_seq = 0
 
         # Variables de Path
         self.path = Path(start_path)
@@ -197,9 +223,12 @@ class Doc:
         readme.write("###Course structure - [course/{0}](course/{0})\n".format(self.course_file.name))
         
        
-        frame_superior.write('<html>\n<style>\nbody{\nborder-bottom: 3px solid #CE7D35;\n}\n'
-            'h1{\ntext-align: center;\npadding-top: 40px;\n}\n</style>\n'
-            '<title>Frame-Superior</title>\n</head>\n<body>\n<h1>%s\n</h1>\n</body>\n</html>'%self.course_title)
+        frame_superior.write('<html>\n<style>\nimg{\ndisplay:inline-block;\nwidth: %s\n}\n'
+            'body{\nborder-bottom: 3px solid #CE7D35;\n}\n'
+            'h1{\nvertical-align:top;\ndisplay:inline-block;\ntext-align: center;\npadding-top: 20px;\nwidth: %s\n}\n</style>\n'
+            '<title>Frame-Superior</title>\n</head>\n<body>\n<div>\n'
+            '<img src="https://lh3.googleusercontent.com/proxy/_ERlWh2eXkbdz7NynwBXPMTt2trJ6HbFV52Vie7HryAaXTWugIA2aJFyrfdqwcxivdc1FagWjs-asX3gmweI6nKc5y5A6qq1IGCMCf8g3gPwRk80blCqevY3eoFpIGt-NDhCt4CHZeiFLHAz1hwjamMh1-oJJw">\n'
+            '<h1>%s\n</h1>\n</div>\n</body>\n</html>'%('15%;','70%;',self.course_title))
 
         self.crear_CSS()
         frame_izquierdo.write('<html>\n<style>\nbody{\nborder-right: 3px solid #CE7D35;\n}\n</style>\n'
@@ -227,7 +256,7 @@ class Doc:
         readme.close()
         file_index.close()
         frame_izquierdo.close()
-        print("Transformación finalizada")
+        #print("Transformación finalizada")
 
 
     # Obtener submenu
@@ -289,7 +318,6 @@ class Doc:
         pub_seq = OrderedDict()
         all_seq = OrderedDict()
         frame_izquierdo.write('\n<ul class="collapse navbar-nav flex-column" id="submenu%d">\n'%num_id) 
-        num_id_seq = 0
         for s in seq:
             self.num_units = 0;
             count_paths_html = 0;
@@ -314,13 +342,13 @@ class Doc:
                 unit_list = [l.split('"')[1] for l in seq_txt if "vertical" in l]
                 
                 if (len(unit_list) > 1):
-                    num_id_seq +=1
+                    self.num_id_seq +=1
                     frame_izquierdo.write('<li class="nav-item" id="principal2"><a class="nav-link dropdown-toggle" '
                         'href="#" role="button" data-toggle="collapse" data-target="#menu-submenu%d" aria-haspopup="true" '
-                        'aria-expanded="false">%s</a></li>\n'%(num_id_seq, self.tmp_name_equal))
+                        'aria-expanded="false">%s</a></li>\n'%(self.num_id_seq, self.tmp_name_equal))
                     
                     #frame_izquierdo.write('<ul class="menu-submenu">\n') 
-                    frame_izquierdo.write('\n<ul class="collapse navbar-nav flex-column" id="menu-submenu%d">\n'%num_id_seq) 
+                    frame_izquierdo.write('\n<ul class="collapse navbar-nav flex-column" id="menu-submenu%d">\n'%self.num_id_seq) 
                     pub_dict, all_dict = self.describeUnit(unit_list, readme, frame_izquierdo, sequ_name, path)
                     frame_izquierdo.write('</ul>\n')
                 else:
@@ -459,7 +487,7 @@ class Doc:
             num_files +=1
             # Pendiente agregar condicion para ver si es un video o un html.
             if pro[0] == 'html': # Condicion para ver si el archivo es un html
-                txt_prob = '%s<a class="btn btn-outline-dark border-0 col-4" href="%s.html" data-toggle="button" aria-pressed="false" autocomplete="off">Page</a>\n'%(txt_prob, aux_u_name)
+                txt_prob = '%s<a class="btn btn-outline-dark border-0 col-auto" href="%s.html" data-toggle="button" aria-pressed="false" autocomplete="off">Page</a>\n'%(txt_prob, aux_u_name)
                 #'<a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Primary link</a>'
                 #'data-toggle="button" aria-pressed="false" autocomplete="off"'
                 pro_name = pro[1]+'.xml'
@@ -505,7 +533,7 @@ class Doc:
                 
                 pro_list.append((str(pFile), pro[0]))
             elif pro[0] == 'video':
-                print('Ok')
+                #print('Ok')
                 pro_name = pro[1]+'.xml'
                 pFile = self.path / pro[0] / pro_name
                 video_title = self.obtener_video(pFile)
@@ -513,7 +541,7 @@ class Doc:
                     #'frameborder=»0″></iframe>\n'%(self.obtener_titulo_video().upper(),video_title))
                 frame_derecho.write('<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
                     'frameborder=»0″></iframe>\n'%video_title)
-                txt_prob = '%s<a class="btn btn-outline-dark border-0 col-4" href="%s.html" data-toggle="button" aria-pressed="false" autocomplete="off">Video</a>\n'%(txt_prob, aux_u_name)
+                txt_prob = '%s<a class="btn btn-outline-dark border-0 col-auto" href="%s.html" data-toggle="button" aria-pressed="false" autocomplete="off">Video</a>\n'%(txt_prob, aux_u_name)
                 frame_derecho.close()
             elif pro[0] == 'problem':
                 pro_name = pro[1]+'.xml'
@@ -533,14 +561,15 @@ class Doc:
                         type_question = 'checkbox'
                     elif ('multiplechoiceresponse' not in line) and ('choicegroup' not in line) and ('checkboxgroup' not in line) and ('choiceresponse' not in line):
                         if type_question == 'radio':
-                            line = line.replace('    <choice','<input type="%s" name="%s"'%(type_question,name))
+                            line = line.replace('    <choice','&nbsp;&nbsp;&nbsp;&nbsp;<input type="%s" name="%s"'%(type_question,name))
                         else:
-                            line = line.replace('    <choice','<label><input type="%s"'%(type_question))
+                            line = line.replace('    <choice','&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="%s"'%(type_question))
                         line = line.replace('correct','value')
                         line = line.replace('</choice>','</label><br>')
                         line = line.replace('</html>','</html><br>')
+                        line = line.replace('<p>','<br>\n<p>')
                         frame_derecho.write(line.replace('/static/','../../../../static/'))
-                txt_prob = '%s<a class="btn btn-outline-dark border-0 col-4" href="%s.html" data-toggle="button" aria-pressed="false" autocomplete="off">Problem</a>\n'%(txt_prob, aux_u_name)
+                txt_prob = '%s<a class="btn btn-outline-dark border-0 col-auto" href="%s.html" data-toggle="button" aria-pressed="false" autocomplete="off">Problem</a>\n'%(txt_prob, aux_u_name)
                 frame_derecho.close()
 
         if aux_u_name.lower() == 'encuesta-de-satisfaccion':
@@ -548,7 +577,7 @@ class Doc:
             frame_derecho.write('<iframe style="width:%s; height:%s;" '
                 'src="https://docs.google.com/forms/d/e/1FAIpQLSeyvQFO-e-VDuuL0TMFTYrIwdVr73UyZ7IGGdgMMXaMYITo9g/viewform"></iframe>'%('100%', '100%'))
             frame_derecho.close()
-        
+        '''
         for name_file in files_list:
             file = open(name_file,'r')
             file_lines = file.readlines()
@@ -566,13 +595,15 @@ class Doc:
                 '<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>\n'
                 '<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>'%(txt_prob, txt_file))
             file.close()
-
+        '''
+        self.reescribir_archivos(files_list, txt_prob)
         return pub_prob, pro_list
 
     # Obtener informacion de unidades
-    def describeDraftUnit(self, unit, readme, frame_izquierdo,sequ_name, path):
+    def describeDraftUnit(self, unit, readme, frame_izquierdo, sequ_name, path):
         aux_sequ_name = self.eliminar_carateres_especiales(sequ_name).replace(' ','-')
         all_uni = OrderedDict()
+        files_list = []
         for u in unit:
             uFile = Path(u[0])
             aux_uFile = u[0].split('/')
@@ -594,18 +625,23 @@ class Doc:
                 aux_u_name.lower(),aux_u_name.lower(),u_name))
 
             frame_derecho = open(str(self.path)+'/course-html/content/%s/%s/%s/%s.html'%(path,aux_sequ_name.lower(),aux_u_name.lower(),aux_u_name.lower()), 'w')
-
+            files_list.append(str(self.path)+'/course-html/content/%s/%s/%s/%s.html'%(path,aux_sequ_name.lower(),aux_u_name.lower(),aux_u_name.lower()))
             readme.write('\t\t* [Unit]\(Draft\) {0} - [{1}]({1})\n'.format(u_name, aux_uFile))
-            prob_list = self.describeDraftProb(u[1:], readme,frame_derecho)
+            prob_list = self.describeDraftProb(u[1:], readme,frame_derecho, files_list, aux_u_name)
             frame_derecho.close()
             all_uni['('+u[0][-9:-4]+')(draft)'+u_name] = (str(uFile), prob_list)
         return all_uni
 
     
-    def describeDraftProb(self, probs, readme,frame_derecho):
+    def describeDraftProb(self, probs, readme, frame_derecho, files_list, aux_u_name):
   
         prob_list = []
+        txt_prob = ''
+        #print(probs)
+        #print(files_list)
+        #print('\n\n')
         for pro in probs:
+            #txt_prob = '%s<a class="btn btn-outline-dark border-0 col-4" href="%s.html" data-toggle="button" aria-pressed="false" autocomplete="off">Page</a>\n'%(txt_prob, aux_u_name.lower())
             pro_name = pro[1]+'.xml'
             pro_name_html = pro[1]+'.html'
             pFile = self.draft_path / pro[0] / pro_name
@@ -628,7 +664,9 @@ class Doc:
                 for text in p_txt_html:
                         for line in text.split('\n'):
                             frame_derecho.write('%s\n'%line.replace('/static/','../../../../static/'))
+            
             prob_list.append((str(pFile), '(draft)'+pro[0]))
+        #self.reescribir_archivos(files_list, txt_prob)
         return prob_list
 
 
