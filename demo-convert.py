@@ -256,7 +256,7 @@ class Doc:
         readme.close()
         file_index.close()
         frame_izquierdo.close()
-        #print("Transformación finalizada")
+        print("Transformación finalizada")
 
 
     # Obtener submenu
@@ -533,14 +533,14 @@ class Doc:
                 
                 pro_list.append((str(pFile), pro[0]))
             elif pro[0] == 'video':
-                #print('Ok')
+                print('Ok')
                 pro_name = pro[1]+'.xml'
                 pFile = self.path / pro[0] / pro_name
                 video_title = self.obtener_video(pFile)
-                #frame_derecho.write('<h3>VIDEO: %s</h3>\n<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
-                    #'frameborder=»0″></iframe>\n'%(self.obtener_titulo_video().upper(),video_title))
-                frame_derecho.write('<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
-                    'frameborder=»0″></iframe>\n'%video_title)
+                frame_derecho.write('<h3>VIDEO: %s</h3>\n<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
+                    'frameborder=»0″></iframe>\n'%(self.obtener_titulo_video().upper(),video_title))
+                #frame_derecho.write('<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
+                    #'frameborder=»0″></iframe>\n'%video_title)
                 txt_prob = '%s<a class="btn btn-outline-dark border-0 col-auto" href="%s.html" data-toggle="button" aria-pressed="false" autocomplete="off">Video</a>\n'%(txt_prob, aux_u_name)
                 frame_derecho.close()
             elif pro[0] == 'problem':
