@@ -256,7 +256,7 @@ class Doc:
         readme.close()
         file_index.close()
         frame_izquierdo.close()
-        print("Transformación finalizada")
+        # print("Transformación finalizada")
 
 
     # Obtener submenu
@@ -264,6 +264,7 @@ class Doc:
    
         self.crear_CSS()
         num_id = 0
+        # print(self.chapter_list)
         for c in self.chapter_list:
             # build path
             c += '.xml'
@@ -533,17 +534,18 @@ class Doc:
                 
                 pro_list.append((str(pFile), pro[0]))
             elif pro[0] == 'video':
-                print('Ok')
+                # print('Ok')
                 pro_name = pro[1]+'.xml'
                 pFile = self.path / pro[0] / pro_name
                 video_title = self.obtener_video(pFile)
-                frame_derecho.write('<h3>VIDEO: %s</h3>\n<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
-                    'frameborder=»0″></iframe>\n'%(self.obtener_titulo_video().upper(),video_title))
-                #frame_derecho.write('<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
-                    #'frameborder=»0″></iframe>\n'%video_title)
+                #frame_derecho.write('<h4>VIDEO: %s</h4>\n<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
+                    #'frameborder=»0″></iframe>\n'%(self.obtener_titulo_video().upper(),video_title))
+                frame_derecho.write('<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
+                    'frameborder=»0″></iframe>\n'%video_title)
                 txt_prob = '%s<a class="btn btn-outline-dark border-0 col-auto" href="%s.html" data-toggle="button" aria-pressed="false" autocomplete="off">Video</a>\n'%(txt_prob, aux_u_name)
                 frame_derecho.close()
             elif pro[0] == 'problem':
+                letters = list(range(97,123))
                 pro_name = pro[1]+'.xml'
                 pFile = self.path / pro[0] / pro_name
                 txt_problem = pFile.open().readlines()
@@ -552,6 +554,7 @@ class Doc:
                 type_question = ''
                 num_groups = 0
                 name = ''
+                '''
                 for line in txt_problem:
                     if '<choicegroup' in line:
                         type_question = 'radio'
@@ -569,6 +572,27 @@ class Doc:
                         line = line.replace('</html>','</html><br>')
                         line = line.replace('<p>','<br>\n<p>')
                         frame_derecho.write(line.replace('/static/','../../../../static/'))
+                '''
+                num_answers = 0
+                for line in txt_problem:
+                    if ('multiplechoiceresponse' not in line) and ('choicegroup' not in line) and ('checkboxgroup' not in line) and ('choiceresponse' not in line):
+                        line = line.replace('<p>','<br><p>')
+                        if '    <choice' in line:
+                            style_option = '%s.'%chr(letters[num_answers])
+                            style_option2 = '%s)'%chr(letters[num_answers])
+                            if((style_option in line) or (style_option2 in line)):
+                                line = line.replace(style_option,'')
+                                line = line.replace(style_option2,'')
+                            line = line.replace('    <choice','<p>&nbsp;&nbsp;&nbsp;&nbsp;%s) '%chr(letters[num_answers]))
+                            num_answers += 1
+                        else:
+                            num_answers = 0
+                        line = line.replace('correct="false">','')
+                        line = line.replace('correct="true">','')
+                        line = line.replace('</choice>','</p>')
+                        line = line.replace('</html>','</html><br>')
+                        frame_derecho.write(line.replace('/static/','../../../../static/'))
+                    
                 txt_prob = '%s<a class="btn btn-outline-dark border-0 col-auto" href="%s.html" data-toggle="button" aria-pressed="false" autocomplete="off">Problem</a>\n'%(txt_prob, aux_u_name)
                 frame_derecho.close()
 
