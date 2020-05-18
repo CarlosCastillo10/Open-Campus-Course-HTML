@@ -102,8 +102,8 @@ class Doc:
             txt_file = ''
             for line in file_lines:
                 txt_file += line
-            if '<iframe class=»youtube-player»' in txt_file:
-                style_aditional = 'iframe{\nwidth: %s;\nheight: %s;\nmargin: 20px 80px;\n}\n'%('80%','60%')
+            if '<iframe' in txt_file:
+                style_aditional = 'iframe{\nwidth: %s;\nheight: %s;\nmargin: 20px 80px;\n}\n'%('85%','75%')
             else:
                 style_aditional = ''
 
@@ -227,7 +227,7 @@ class Doc:
             'body{\nborder-bottom: 3px solid #CE7D35;\n}\n'
             'h1{\nvertical-align:top;\ndisplay:inline-block;\ntext-align: center;\npadding-top: 20px;\nwidth: %s\n}\n</style>\n'
             '<title>Frame-Superior</title>\n</head>\n<body>\n<div>\n'
-            '<img src="https://lh3.googleusercontent.com/proxy/_ERlWh2eXkbdz7NynwBXPMTt2trJ6HbFV52Vie7HryAaXTWugIA2aJFyrfdqwcxivdc1FagWjs-asX3gmweI6nKc5y5A6qq1IGCMCf8g3gPwRk80blCqevY3eoFpIGt-NDhCt4CHZeiFLHAz1hwjamMh1-oJJw">\n'
+            '<img src="http://opencampus.utpl.edu.ec/static/themes/utpl_final/images/openCampus_logo.3c9532a0c56d.png">\n'
             '<h1>%s\n</h1>\n</div>\n</body>\n</html>'%('15%;','70%;',self.course_title))
 
         self.crear_CSS()
@@ -235,7 +235,8 @@ class Doc:
             '<head>\n<title>Frame-Izquierdo</title>\n<link rel="stylesheet" href="../css/estilos.css">\n'
             '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" '
             'integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">\n'
-            '</head>\n<body>\n<h3 style="text-align: center;">Contenido</h3>\n<nav class="navbar navbar-expand-lg navbar-light bg-light">\n'
+            '</head>\n<body>\n<div class="container">\n<div class="col-12">\n<h3 style="text-align: center;">Contenido</h3>\n'
+            '<nav class="navbar navbar-expand-lg navbar-light">\n'
             '<ul class="navbar-nav flex-column">\n')
 
         
@@ -248,7 +249,7 @@ class Doc:
             '<frame src="content/%s"  marginwidth="100px" frameborder="yes" name="derecho"></frame>\n</frameset>\n</frameset>\n</html>'%(self.course_title,
                 "18%","10%","27%", "30%",self.first_page))
 
-        frame_izquierdo.write('</ul>\n</nav>\n'
+        frame_izquierdo.write('</ul>\n</nav>\n</div>\n</div>\n'
             '<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>\n'
             '<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>\n'
             '<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>\n'
@@ -256,7 +257,7 @@ class Doc:
         readme.close()
         file_index.close()
         frame_izquierdo.close()
-        # print("Transformación finalizada")
+        print("Transformación finalizada")
 
 
     # Obtener submenu
@@ -281,7 +282,7 @@ class Doc:
 
                 # Formar menu principal
                 num_id+=1
-                frame_izquierdo.write('<li class="nav-item" id="principal"><a class="nav-link dropdown-toggle" '
+                frame_izquierdo.write('<div class="row">\n<li class="col-11 nav-item" id="principal"><a class="nav-link" '
                     'href="#" role="button" data-toggle="collapse" data-target="#submenu%d" aria-haspopup="true" '
                     'aria-expanded="false">%s</a>'%(num_id,chap_name))
                 
@@ -303,7 +304,7 @@ class Doc:
 
 
                 pub_seq_struct, all_seq_struct = self.describeSequen(seq_list, readme, frame_izquierdo, namePath,num_id)
-                frame_izquierdo.write('</li>\n')
+                frame_izquierdo.write('</li>\n<span class="pt-3 col-1 dropdown-toggle"></span>\n</div>\n')
 
                 ### estructura publica
                 self.public_problems_struct[chap_name] = pub_seq_struct
@@ -344,9 +345,10 @@ class Doc:
                 
                 if (len(unit_list) > 1):
                     self.num_id_seq +=1
-                    frame_izquierdo.write('<li class="nav-item" id="principal2"><a class="nav-link dropdown-toggle" '
+                    frame_izquierdo.write('<div class="row">\n<li class="col-11 nav-item" id="principal2"><a class="nav-link" '
                         'href="#" role="button" data-toggle="collapse" data-target="#menu-submenu%d" aria-haspopup="true" '
-                        'aria-expanded="false">%s</a></li>\n'%(self.num_id_seq, self.tmp_name_equal))
+                        'aria-expanded="false">%s</a></li>\n'
+                        '<span class="pt-3 col-1 dropdown-toggle"></span>\n</div>\n'%(self.num_id_seq, self.tmp_name_equal))
                     
                     #frame_izquierdo.write('<ul class="menu-submenu">\n') 
                     frame_izquierdo.write('\n<ul class="collapse navbar-nav flex-column" id="menu-submenu%d">\n'%self.num_id_seq) 
@@ -534,14 +536,14 @@ class Doc:
                 
                 pro_list.append((str(pFile), pro[0]))
             elif pro[0] == 'video':
-                # print('Ok')
+                print('Ok')
                 pro_name = pro[1]+'.xml'
                 pFile = self.path / pro[0] / pro_name
                 video_title = self.obtener_video(pFile)
-                #frame_derecho.write('<h4>VIDEO: %s</h4>\n<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
-                    #'frameborder=»0″></iframe>\n'%(self.obtener_titulo_video().upper(),video_title))
-                frame_derecho.write('<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
-                    'frameborder=»0″></iframe>\n'%video_title)
+                frame_derecho.write('<h4>VIDEO: %s</h4>\n<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
+                    'frameborder=»0″></iframe>\n'%(self.obtener_titulo_video().upper(),video_title))
+                # frame_derecho.write('<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
+                    # 'frameborder=»0″></iframe>\n'%video_title)
                 txt_prob = '%s<a class="btn btn-outline-dark border-0 col-auto" href="%s.html" data-toggle="button" aria-pressed="false" autocomplete="off">Video</a>\n'%(txt_prob, aux_u_name)
                 frame_derecho.close()
             elif pro[0] == 'problem':
@@ -628,6 +630,7 @@ class Doc:
         aux_sequ_name = self.eliminar_carateres_especiales(sequ_name).replace(' ','-')
         all_uni = OrderedDict()
         files_list = []
+        direccion = ''
         for u in unit:
             uFile = Path(u[0])
             aux_uFile = u[0].split('/')
@@ -648,24 +651,36 @@ class Doc:
             frame_izquierdo.write('<li class="nav-item"><a class="nav-link" href="%s/%s/%s/%s.html" target="derecho">%s</a></li>\n'%(path,aux_sequ_name.lower(),
                 aux_u_name.lower(),aux_u_name.lower(),u_name))
 
-            frame_derecho = open(str(self.path)+'/course-html/content/%s/%s/%s/%s.html'%(path,aux_sequ_name.lower(),aux_u_name.lower(),aux_u_name.lower()), 'w')
-            files_list.append(str(self.path)+'/course-html/content/%s/%s/%s/%s.html'%(path,aux_sequ_name.lower(),aux_u_name.lower(),aux_u_name.lower()))
+            direccion = str(self.path)+'/course-html/content/%s/%s/%s'%(path,aux_sequ_name.lower(),aux_u_name.lower())
+            #frame_derecho = open(str(self.path)+'/course-html/content/%s/%s/%s/%s.html'%(path,aux_sequ_name.lower(),aux_u_name.lower(),aux_u_name.lower()), 'w')
+            #files_list.append(str(self.path)+'/course-html/content/%s/%s/%s/%s.html'%(path,aux_sequ_name.lower(),aux_u_name.lower(),aux_u_name.lower()))
+            # files_list.append(str(self.path)+'/course-html/content/%s/%s/%s/%s.html'%(path,aux_sequ_name.lower(),aux_u_name.lower(),aux_u_name.lower()))
             readme.write('\t\t* [Unit]\(Draft\) {0} - [{1}]({1})\n'.format(u_name, aux_uFile))
-            prob_list = self.describeDraftProb(u[1:], readme,frame_derecho, files_list, aux_u_name)
-            frame_derecho.close()
+            prob_list = self.describeDraftProb(u[1:], readme, direccion, aux_u_name.lower())
+            #frame_derecho.close()
             all_uni['('+u[0][-9:-4]+')(draft)'+u_name] = (str(uFile), prob_list)
         return all_uni
 
     
-    def describeDraftProb(self, probs, readme, frame_derecho, files_list, aux_u_name):
-  
+    def describeDraftProb(self, probs, readme, direccion, aux_u_name):
+        # print(aux_u_name)
         prob_list = []
+        # print(probs)
+        # print('\n\n')
         txt_prob = ''
+        files_list = []
+        num_drafts_prob = 0
         #print(probs)
         #print(files_list)
         #print('\n\n')
+        tmp_aux_u_name = aux_u_name
         for pro in probs:
-            #txt_prob = '%s<a class="btn btn-outline-dark border-0 col-4" href="%s.html" data-toggle="button" aria-pressed="false" autocomplete="off">Page</a>\n'%(txt_prob, aux_u_name.lower())
+            if num_drafts_prob > 0:
+                aux_u_name = '%s-%d'%(tmp_aux_u_name,num_drafts_prob)
+            num_drafts_prob+=1
+            frame_derecho = open('%s/%s.html'%(direccion,aux_u_name),'w')
+            files_list.append('%s/%s.html'%(direccion,aux_u_name))
+            #txt_prob = '%s<a class="btn btn-outline-dark border-0 col-4" href="%s.html" data-toggle="button" aria-pressed="false" autocomplete="off">Page</a>\n'%(txt_prob, aux_u_name)
             pro_name = pro[1]+'.xml'
             pro_name_html = pro[1]+'.html'
             pFile = self.draft_path / pro[0] / pro_name
@@ -680,17 +695,18 @@ class Doc:
             pFile = pFile.relative_to(*pFile.parts[:1])
             fline = p_txt[0]
             p_name = fline.split('"')[1]
+           
             if pro[0] == 'problem':
                 readme.write('\t\t\t* [{0}]\(Draft\) {1} - [{2}]({2})\n'.format(pro[0], p_name, aux_pFile))
-                print('Entra aqui')
             else:
                 readme.write('\t\t\t* [{0}]\(Draft\) - [{1}]({1})\n'.format(pro[0], aux_pFile))
+                txt_prob = '%s<a class="btn btn-outline-dark border-0 col-auto" href="%s.html" data-toggle="button" aria-pressed="false" autocomplete="off">Page</a>\n'%(txt_prob, aux_u_name)
                 for text in p_txt_html:
-                        for line in text.split('\n'):
-                            frame_derecho.write('%s\n'%line.replace('/static/','../../../../static/'))
-            
+                    for line in text.split('\n'):
+                        frame_derecho.write('%s\n'%line.replace('/static/','../../../../static/'))
+            frame_derecho.close()
             prob_list.append((str(pFile), '(draft)'+pro[0]))
-        #self.reescribir_archivos(files_list, txt_prob)
+        self.reescribir_archivos(files_list, txt_prob)
         return prob_list
 
 
