@@ -12,6 +12,7 @@ import xml.etree.ElementTree as ET
 from shutil import rmtree
 import os, fnmatch
 import pafy
+import shutil
 
 
 class Doc:
@@ -41,7 +42,8 @@ class Doc:
             '#principal2 a:hover{\ncolor:#CE7D35;\n}\n\n#principal2 ul{\npadding-left: 20px;\n}')
 
         
-
+    def copiar_archivos(self):
+        shutil.copytree('%s/static/'%str(self.path),'%s/course-html/static'%str(self.path))
     def eliminar_carateres_especiales(self, palabra):
         
         trans_tab = dict.fromkeys(map(ord, u'\u0301\u0308'), None)
@@ -108,12 +110,14 @@ class Doc:
                 style_aditional = ''
 
             file = open(name_file,'w')
-            file.write('<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" '
+            file.write('<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>\n'
+                '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" '
                 'integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">\n'
                 '<style type="text/css">\n%s.botones{\nborder-radius: 23px;\n}\n</style>\n'
                 '<div class ="container">\n<div class="row justify-content-center">\n'
                 '<div class="btn-group btn-group-lg col-6 p-0 my-4 border border-dark botones" role="group" aria-label="Toolbar with button groups">\n'
                 '%s</div><br><br>\n</div>\n%s'
+                '<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>\n'
                 '<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>\n'
                 '<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>\n'
                 '<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>'%(style_aditional,txt_prob, txt_file))
@@ -166,6 +170,8 @@ class Doc:
         self.type_content = 0
         self.course_title = ''
         self.num_id_seq = 0
+        self.name_unit = ''
+        self.chapter_name = ''
 
         # Variables de Path
         self.path = Path(start_path)
@@ -245,7 +251,7 @@ class Doc:
             'frameborder="no" bordercolor="#333" marginheight="%s" scrolling="no">\n'
             '<frame src="content/frame-superior.html" name="superior"></frame>\n'
             '<frameset cols="%s,*" frameborder="no" bordercolor="#333" marginheight="%s" scrolling="yes">\n'
-            '<frame src="content/frame-izquierdo.html" name="izquierdo"</frame>\n'
+            '<frame src="content/frame-izquierdo.html" name="izquierdo"></frame>\n'
             '<frame src="content/%s"  marginwidth="100px" frameborder="yes" name="derecho"></frame>\n</frameset>\n</frameset>\n</html>'%(self.course_title,
                 "18%","10%","27%", "30%",self.first_page))
 
@@ -257,6 +263,7 @@ class Doc:
         readme.close()
         file_index.close()
         frame_izquierdo.close()
+        shutil.copytree('%s/static/'%str(self.path),'%s/course-html/static'%str(self.path))
         print("Transformación finalizada")
 
 
@@ -277,6 +284,7 @@ class Doc:
 
                 first_line = chap_txt[0]
                 chap_name = first_line.split('"')[1]
+                self.chapter_name = chap_name
 
                 readme.write('* [Section] {0} - [{1}]({1})\n'.format(chap_name, aux_cFile))
 
@@ -350,7 +358,6 @@ class Doc:
                         'aria-expanded="false">%s</a></li>\n'
                         '<span class="pt-3 col-1 dropdown-toggle"></span>\n</div>\n'%(self.num_id_seq, self.tmp_name_equal))
                     
-                    #frame_izquierdo.write('<ul class="menu-submenu">\n') 
                     frame_izquierdo.write('\n<ul class="collapse navbar-nav flex-column" id="menu-submenu%d">\n'%self.num_id_seq) 
                     pub_dict, all_dict = self.describeUnit(unit_list, readme, frame_izquierdo, sequ_name, path)
                     frame_izquierdo.write('</ul>\n')
@@ -389,6 +396,7 @@ class Doc:
 
     def describeUnit(self, uni, readme, frame_izquierdo,sequ_name, path):
         aux_sequ_name = self.eliminar_carateres_especiales(sequ_name).replace(' ','-')
+        # self.name_unit = sequ_name
         #print(uni)
         #print('\n\n')
         pub_uni = OrderedDict()
@@ -422,6 +430,7 @@ class Doc:
                 #frame_derecho = open(str(self.path)+'/course-html/content/%s/%s/%s/%s.html'%(path,aux_sequ_name.lower(),aux_u_name.lower(),aux_u_name.lower()), 'w')
                 direccion = str(self.path)+'/course-html/content/%s/%s/%s'%(path,aux_sequ_name.lower(),aux_u_name.lower())
                 self.type_content = 1
+                self.name_unit = u_name
             else:
                 frame_izquierdo.write('<li class="nav-item"><a class="nav-link" href="%s/%s/%s.html" target="derecho">%s</a></li>\n'%(path,aux_sequ_name.lower(),aux_u_name.lower(),sequ_name))
                 if(self.num_pages == 0):
@@ -431,6 +440,7 @@ class Doc:
                 #frame_derecho = open(str(self.path)+'/course-html/content/%s/%s/%s.html'%(path,aux_sequ_name.lower(),aux_u_name.lower()), 'w')
                 direccion = str(self.path)+'/course-html/content/%s/%s'%(path,aux_sequ_name.lower())
                 self.type_content = 0
+                self.name_unit = sequ_name
             #if(aux_u_name.lower() == 'encuesta de satisfacción'):
                 #print("Es una encuesta")
             
@@ -458,7 +468,7 @@ class Doc:
         return pub_uni, all_uni
 
     def describeProb(self, prob_list, readme, direccion, name):
-       
+        
         '''
         print(prob_list)
         print(len(prob_list))
@@ -490,7 +500,8 @@ class Doc:
             num_files +=1
             # Pendiente agregar condicion para ver si es un video o un html.
             if pro[0] == 'html': # Condicion para ver si el archivo es un html
-                txt_prob = '%s<a class="btn btn-outline-dark border-0 col-auto" href="%s.html" data-toggle="button" aria-pressed="false" autocomplete="off">Page</a>\n'%(txt_prob, aux_u_name)
+                txt_prob = '%s<a class="btn btn-outline-dark border-0 col-auto" href="%s.html" data-toggle="button" aria-pressed="false" autocomplete="off" title="%s"><i class="far fa-file-alt fa-lg fa-fw"></i></a>\n'%(txt_prob, 
+                    aux_u_name, self.name_unit)
                 #'<a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Primary link</a>'
                 #'data-toggle="button" aria-pressed="false" autocomplete="off"'
                 pro_name = pro[1]+'.xml'
@@ -527,11 +538,12 @@ class Doc:
                     #print(str(p_txt_html))
                     for text in p_txt_html:
                         for line in text.split('\n'):
-                            line = line.replace('_','-')
+                            if 'http' not in line:
+                                line = line.replace('_','-')
                             if self.type_content == 0:
-                                frame_derecho.write('%s\n'%line.replace('/static/','../../../../static/'))
+                                frame_derecho.write('%s\n'%line.replace('/static/','../../../static/'))
                             else:
-                                frame_derecho.write('%s\n'%line.replace('/static/','../../../../../static/'))
+                                frame_derecho.write('%s\n'%line.replace('/static/','../../../../static/'))
                     frame_derecho.close()
                 
                 pro_list.append((str(pFile), pro[0]))
@@ -539,12 +551,13 @@ class Doc:
                 print('Ok')
                 pro_name = pro[1]+'.xml'
                 pFile = self.path / pro[0] / pro_name
-                video_title = self.obtener_video(pFile)
-                frame_derecho.write('<h4>VIDEO: %s</h4>\n<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
-                    'frameborder=»0″></iframe>\n'%(self.obtener_titulo_video().upper(),video_title))
+                video_url = self.obtener_video(pFile)
+                video_name = self.obtener_titulo_video()
+                frame_derecho.write('<h5>VIDEO: %s</h5>\n<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
+                    'frameborder=»0″></iframe>\n'%(video_name.upper(),video_url))
                 # frame_derecho.write('<iframe class=»youtube-player» type=»text/html» width=»846″ height=»484″ src=%s ' 
-                    # 'frameborder=»0″></iframe>\n'%video_title)
-                txt_prob = '%s<a class="btn btn-outline-dark border-0 col-auto" href="%s.html" data-toggle="button" aria-pressed="false" autocomplete="off">Video</a>\n'%(txt_prob, aux_u_name)
+                    # 'frameborder=»0″></iframe>\n'%video_url)
+                txt_prob = '%s<a class="btn btn-outline-dark border-0 col-auto" href="%s.html" data-toggle="button" aria-pressed="false" autocomplete="off" title="Video: %s"><i class="fas fa-film fa-lg fa-fw"></i></a>\n'%(txt_prob, aux_u_name, video_name)
                 frame_derecho.close()
             elif pro[0] == 'problem':
                 letters = list(range(97,123))
@@ -593,9 +606,10 @@ class Doc:
                         line = line.replace('correct="true">','')
                         line = line.replace('</choice>','</p>')
                         line = line.replace('</html>','</html><br>')
-                        frame_derecho.write(line.replace('/static/','../../../../static/'))
+                        frame_derecho.write(line.replace('/static/','../../../static/'))
                     
-                txt_prob = '%s<a class="btn btn-outline-dark border-0 col-auto" href="%s.html" data-toggle="button" aria-pressed="false" autocomplete="off">Problem</a>\n'%(txt_prob, aux_u_name)
+                txt_prob = '%s<a class="btn btn-outline-dark border-0 col-auto" href="%s.html" data-toggle="button" aria-pressed="false" autocomplete="off" title="%s - %s"><i class="fas fa-list-alt fa-lg fa-fw"></i></a>\n'%(txt_prob, 
+                    aux_u_name, self.name_unit, self.chapter_name)
                 frame_derecho.close()
 
         if aux_u_name.lower() == 'encuesta-de-satisfaccion':
@@ -638,6 +652,7 @@ class Doc:
             first_line = uFile.open().readlines()[0]
             uFile = uFile.relative_to(*uFile.parts[:1])
             u_name = first_line.split('"')[1]
+            self.name_unit = u_name
             aux_u_name = self.eliminar_carateres_especiales(u_name.replace(' ','-'))
             
             if os.path.isdir('%s/course-html/content/%s/%s/%s'%(str(self.path), path, self.eliminar_carateres_especiales(sequ_name).replace(' ','-').lower()
@@ -700,7 +715,8 @@ class Doc:
                 readme.write('\t\t\t* [{0}]\(Draft\) {1} - [{2}]({2})\n'.format(pro[0], p_name, aux_pFile))
             else:
                 readme.write('\t\t\t* [{0}]\(Draft\) - [{1}]({1})\n'.format(pro[0], aux_pFile))
-                txt_prob = '%s<a class="btn btn-outline-dark border-0 col-auto" href="%s.html" data-toggle="button" aria-pressed="false" autocomplete="off">Page</a>\n'%(txt_prob, aux_u_name)
+                txt_prob = '%s<a class="btn btn-outline-dark border-0 col-auto" href="%s.html" data-toggle="button" aria-pressed="false" autocomplete="off" title="%s - %s"><i class="far fa-file-alt fa-lg fa-fw"></i></a>\n'%(txt_prob, 
+                    aux_u_name,self.chapter_name, self.name_unit)
                 for text in p_txt_html:
                     for line in text.split('\n'):
                         frame_derecho.write('%s\n'%line.replace('/static/','../../../../static/'))
