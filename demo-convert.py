@@ -255,7 +255,12 @@ class Doc:
             '<frame src="content/%s"  marginwidth="100px" frameborder="yes" name="derecho"></frame>\n</frameset>\n</frameset>\n</html>'%(self.course_title,
                 "18%","10%","27%", "30%",self.first_page))
 
-        frame_izquierdo.write('</ul>\n</nav>\n</div>\n</div>\n'
+        frame_izquierdo.write('</ul>\n</nav>\n<br><br>\n<hr>\n'
+            '<footer class="py-4 text-center">\n<table border="0" width="100%">\n<tbody>\n<tr>\n'
+            '<td>\n<span>Bajo licencia<br><br>\n<a href="https://mirrors.creativecommons.org/" target="_blank"><img src="http://opencampus.utpl.edu.ec/static/themes/utpl_final/images/LicenciaCC.e5985f534b90.png" width="115px" height="45px"></a>\n</span></td>\n'
+            '<td>\n<span>Powered by<br><br>\n<a href="https://www.utpl.edu.ec/#" target="_blank"><img src="https://www.utpl.edu.ec/manual_imagen/images/institucional/UTPL-INSTITUCIONAL-color.jpg" width="115px" height="45px"></a>\n</span></td>\n'
+            '<td>\n<span>Empowed by<br><br>\n <a href="https://open.edx.org/" target="_blank"><img src="http://opencampus.utpl.edu.ec/static/themes/utpl_final/images/OpenEdx.5def54e4aeb8.png" width="115px" height="45px"></a>\n</span></td>\n'
+            '</tr>\n</tbody>\n</table>\n</footer>\n</div>\n</div>\n'
             '<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>\n'
             '<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>\n'
             '<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>\n'
