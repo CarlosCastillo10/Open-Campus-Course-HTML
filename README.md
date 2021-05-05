@@ -15,4 +15,4 @@
 
 ## EJEMPLO DE FUNCIONAMIENTO
 
-Curso: (Fundamentos Informáticos)[https://carloscastillo10.github.io/Fundamentos-Informaticos/]
+Curso: [Fundamentos Informáticos](https://carloscastillo10.github.io/Fundamentos-Informaticos/)
